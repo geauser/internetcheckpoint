@@ -5,6 +5,11 @@ export function ApiStack({ stack, app }: StackContext) {
 
   const api = new Api(stack, "api", {
 
+    defaults: {
+      function: {
+        runtime: 'nodejs18.x',
+      },
+    },
     ...(app.stage === 'prod' && {
       customDomain: {
         domainName: 'api.internetcheckpoint.page',
