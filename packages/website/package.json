@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "nuxt build",
+    "build": "sst bind nuxt build",
     "dev": "sst bind nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
