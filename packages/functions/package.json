@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "test": "sst bind vitest",
-    "typecheck": "tsc -noEmit"
+    "typecheck": "tsc -noEmit",
+    "migration": "tsx ./scripts/createMigration.ts",
+    "migrate": "sst bind tsx ./scripts/runMigration.ts"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.115",
@@ -14,5 +16,7 @@
     "vitest": "^0.31.4"
   },
   "dependencies": {
+    "kysely": "^0.25.0",
+    "kysely-planetscale": "^1.3.0"
   }
 }

@@ -3,6 +3,8 @@
   "compilerOptions": {
     "module": "esnext",
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "database": ["./planetscale/db.ts"],
+    }
   }
 }
