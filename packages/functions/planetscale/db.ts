@@ -13,11 +13,11 @@ export interface CommentTable {
   importedAuthorPhoto: string | null,
   votes: number,
   repliesCount: number,
-  createdAt: Date | null,
+  createdAt?: Date | null,
 }
 
 interface Database {
-  comments: CommentTable;
+  comment: CommentTable;
 }
 
 export const db = new Kysely<Database>({
