@@ -1,9 +1,17 @@
 import { StackContext, Api, Config } from "sst/constructs";
 
 
-export function ApiStack({ stack }: StackContext) {
+export function ApiStack({ stack, app }: StackContext) {
 
   const api = new Api(stack, "api", {
+
+    ...(app.stage === 'prod' && {
+      customDomain: {
+        domainName: 'api.internetcheckpoint.page',
+        hostedZone: 'internetcheckpoint.page',
+      },
+    }),
+
     routes: {
       "GET /comments": "packages/functions/src/comments.handler",
     },
@@ -16,4 +24,8 @@ export function ApiStack({ stack }: StackContext) {
   stack.addOutputs({
     ApiEndpoint: api.url,
   });
+
+  return {
+    url: api.customDomainUrl ?? api.url,
+  };
 }
