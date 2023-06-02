@@ -1,4 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+const { NUXT_GOOGLE_ANALYTICS_ID, NUXT_API_URL } = process.env;
+
 export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   modules: [
@@ -18,9 +21,10 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  ...(NUXT_GOOGLE_ANALYTICS_ID ? ({ gtag: { id: NUXT_GOOGLE_ANALYTICS_ID } }) : {}),
   runtimeConfig: {
     public: {
-      apiUrl: 'https://odiw5mq8be.execute-api.us-east-1.amazonaws.com',
+      apiUrl: NUXT_API_URL ?? 'https://odiw5mq8be.execute-api.us-east-1.amazonaws.com',
     }
   }
 });
