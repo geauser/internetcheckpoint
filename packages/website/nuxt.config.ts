@@ -3,6 +3,11 @@
 const { NUXT_GOOGLE_ANALYTICS_ID, NUXT_API_URL } = process.env;
 
 export default defineNuxtConfig({
+  vue: {
+    compilerOptions: {
+      isCustomElement: tag => tag.includes('media-'),
+    }
+  },
   css: ['~/assets/css/main.css'],
   modules: [
     [
