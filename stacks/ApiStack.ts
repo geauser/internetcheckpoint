@@ -27,7 +27,7 @@ export function ApiStack({ stack, app }: StackContext) {
   ]);
 
   stack.addOutputs({
-    ApiEndpoint: api.url,
+    ApiEndpoint: api.customDomainUrl ?? api.url,
   });
 
   return {
