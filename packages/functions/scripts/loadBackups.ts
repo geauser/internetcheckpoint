@@ -1,17 +1,14 @@
 import fs from 'node:fs';
-import { CommentTable, db } from '@internetcheckpoint/functions/src/db';
+import path from 'node:path';
+import { CommentTable, db } from 'planetscale/db';
 
 
 
 (async () => {
 
 
-const files = fs.readdirSync('./backups');
-
-let totalLines = 0;
-let totalComments = 0;
-
-
+const backupsFolderPath = path.join(process.cwd(), '../../backups');
+const files = fs.readdirSync(backupsFolderPath);
 const repliesCounts:Record<string, number> = {};
 const comments: (Omit<CommentTable, 'id' | 'authorPhoto' | 'authorName'> & { id: string })[] = [];
 
@@ -19,9 +16,8 @@ const comments: (Omit<CommentTable, 'id' | 'authorPhoto' | 'authorName'> & { id:
 for (const file of files) {
 
   // read content of the file
-  const content = fs.readFileSync(`./backups/${file}`, 'utf-8');
+  const content = fs.readFileSync(`${backupsFolderPath}/${file}`, 'utf-8');
   const lines = content.split('\n');
-  totalLines += lines.length;
 
   // Count the number of replies
   for (const line of lines) {
@@ -45,7 +41,6 @@ for (const file of files) {
     try {
 
       const comment = JSON.parse(line.trim());
-      totalComments++;
 
       if (isNaN(parseInt(comment.votes, 10))) {
         throw new Error('Votes is not a number');
@@ -56,7 +51,6 @@ for (const file of files) {
         authorUid: null,
         authorChannelId: comment.channel,
         text: comment.text,
-        isImported: true,
         importedAuthorName: comment.author,
         importedAuthorPhoto: comment.photo,
         votes: parseInt(comment.votes, 10),
@@ -71,6 +65,7 @@ for (const file of files) {
 
 
 let inserted = 0;
+// Use chunk to avoid issues with planetscale
 const CHUNK_SIZE = 1000;
 
 for (let i = 0; i < comments.length; i += CHUNK_SIZE) {
@@ -94,14 +89,3 @@ process.exit(0);
 
 
 })();
-
-// {
-//   "heart": false,
-//   "votes": "0",
-//   "photo": "https://yt3.ggpht.com/ytc/AAUvwnhgFuNBzsMEtvMhf67BuRqZvziPLr6v1KWiQKcWxg=s176-c-k-c0x00ffffff-no-rj",
-//   "author": "Quickchuckle",
-//   "cid": "UgxEuKpWYgNTjKZUMxZ4AaABAg",
-//   "text": "Checkpoint\nA swamp? Interesting, but on to the side-quest.. destroy 10 machines.. alright seems easy enough",
-//   "time": "2 kuu eest",
-//   "channel": "UC-IMd7yMD5fuKEBmdLjCPUQ"
-// }

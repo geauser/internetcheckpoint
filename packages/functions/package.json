@@ -5,6 +5,7 @@
   "scripts": {
     "test": "sst bind vitest",
     "typecheck": "tsc -noEmit",
+    "load-backups": "sst bind tsx ./scripts/loadBackups.ts",
     "migration": "tsx ./scripts/createMigration.ts",
     "migrate": "sst bind tsx ./scripts/runMigration.ts"
   },
