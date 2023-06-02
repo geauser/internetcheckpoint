@@ -5,6 +5,7 @@ export function ApiStack({ stack }: StackContext) {
 
   const api = new Api(stack, "api", {
     routes: {
+      "GET /comments": "packages/functions/src/comments.handler",
     },
   });
 
