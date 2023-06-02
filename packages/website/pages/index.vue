@@ -10,6 +10,8 @@ const loadingComments = ref(false);
 const batchIndex = ref(0);
 
 const el = ref(null);
+const audio = ref<HTMLAudioElement | null>(null);
+const audioIsPaused = ref(true);
 const isVisible = useElementVisibility(el);
 
 async function loadComments() {
@@ -38,20 +40,32 @@ watch(isVisible, async () => {
   await loadComments();
 });
 
+onMounted(() => {
+  audioIsPaused.value = audio.value?.paused ?? true;
+  audio.value?.addEventListener('playing', () => {
+    audioIsPaused.value = false;
+  });
+});
+
 </script>
 
 <template>
 
   <div class="relative aspect-video bg-black w-full video group">
 
-    <div class="absolute w-full bottom-0 bg-gradient-to-b from-transparent to-black h-40 group-hover:opacity-70 opacity-0 transition-opacity pointer-events-none"></div>
+    <div
+      class="absolute w-full bottom-0 bg-gradient-to-b from-transparent to-black h-40 group-hover:opacity-70 opacity-0 transition-opacity pointer-events-none"
+      :class="{ 'opacity-70': audioIsPaused }"></div>
 
     <media-controller class="absolute w-full h-full bg-transparent bottom-0">
 
       <audio
         slot="media"
-        autoplay loop 
         class="hidden"
+        ref="audio"
+        autoplay loop
+        controls
+        type="audio/mp3"
         src="/audio/spiky_barrel_maze.mp3"></audio>
 
       <media-control-bar class="group-hover:!opacity-100 relative !transition-opacity">
