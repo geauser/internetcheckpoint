@@ -45,19 +45,22 @@ onMounted(() => {
   audio.value?.addEventListener('playing', () => {
     audioIsPaused.value = false;
   });
+  audio.value?.addEventListener('pause', () => {
+    audioIsPaused.value = true;
+  });
 });
 
 </script>
 
 <template>
 
-  <div class="relative aspect-video bg-black w-full video group">
+  <div class="relative aspect-video bg-black w-full video group" >
 
     <div
       class="absolute w-full bottom-0 bg-gradient-to-b from-transparent to-black h-40 group-hover:opacity-70 opacity-0 transition-opacity pointer-events-none"
       :class="{ 'opacity-70': audioIsPaused }"></div>
 
-    <media-controller class="absolute w-full h-full bg-transparent bottom-0">
+    <media-controller class="absolute w-full h-full bg-transparent bottom-0 group-focus:!opacity-100">
 
       <audio
         slot="media"
