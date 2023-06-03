@@ -10,9 +10,9 @@ export function ApiStack({ stack, app }: StackContext) {
         runtime: 'nodejs18.x',
       },
     },
-    ...(app.stage === 'prod' && {
+    ...(['prod', 'dev'].includes(app.stage) && {
       customDomain: {
-        domainName: 'api.internetcheckpoint.page',
+        domainName: app.stage === 'prod' ? 'api.internetcheckpoint.page':  'api.dev.internetcheckpoint.page',
         hostedZone: 'internetcheckpoint.page',
       },
     }),

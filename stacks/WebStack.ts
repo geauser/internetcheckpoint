@@ -13,9 +13,9 @@ export function WebStack({ stack, app }: StackContext) {
     buildCommand: 'yarn generate',
     errorPage:    'redirect_to_index_page',
 
-    ...(app.stage === 'prod' && {
+    ...(['prod', 'dev'].includes(app.stage) && {
       customDomain: {
-        domainName: 'internetcheckpoint.page',
+        domainName: app.stage === 'prod' ? 'internetcheckpoint.page':  'dev.internetcheckpoint.page',
         hostedZone: 'internetcheckpoint.page',
       },
     }),
