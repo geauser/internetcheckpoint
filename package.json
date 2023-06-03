@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "loadSecrets": "sh -c 'sst secrets load ${0}.env --stage ${0}'",
     "dev": "sst dev",
     "build": "sst build",
     "deploy": "sst deploy",
