@@ -1,11 +1,13 @@
 <script lang="ts" setup>
 import 'media-chrome';
 
+const config = useRuntimeConfig();
+
 
 const siteName    = 'Internet Checkpoint';
 const title       = 'Internet Checkpoint';
-const description = '';
-const image       = '';
+const description = 'A live backup of the "internet checkpoint" by taia777';
+const image       = `https://${config.public.appDomain}/images/og.jpg`;
 
 
 useSeoMeta({
