@@ -1,5 +1,8 @@
 <script lang="ts" setup>
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { type CommentTable } from '@internetcheckpoint/functions/planetscale/db';
+dayjs.extend(relativeTime)
 
 const props = defineProps<{
   // Whether the comment is a reply to another comment
@@ -12,6 +15,14 @@ const showReplies    = ref(false);
 const loadingReplies = ref(false);
 const batchIndex     = ref(0);
 const canFetchMore   = ref(false);
+const needClipping   = ref(false);
+const showClipped    = ref(false);
+
+const textEl = ref<HTMLParagraphElement>();
+
+onMounted(() => {
+  needClipping.value = textEl.value?.scrollHeight! > textEl.value?.clientHeight!;
+});
 
 const config = useRuntimeConfig();
 
@@ -63,9 +74,15 @@ function toggleReplies() {
             {{ comment.importedAuthorName }}
           </h1>
         </a>
-        <!-- <span class="text-xs font-normal ml-2">{{ comment.id.split('.')[1] }}</span> -->
+        <span class="text-xs font-normal ml-2">{{ dayjs(comment.createdAt).fromNow() }}</span>
         </div>
-        <p class="text-sm line-clamp-4">{{ comment.text }}</p>
+        <p ref="textEl" class="text-sm" :class="{ 'line-clamp-5 sm:line-clamp-4': !showClipped }">{{ comment.text }}</p>
+        <button
+          v-if="needClipping" 
+          class="font-medium text-sm text-stone-600 mt-1 hover:underline"
+          @click="showClipped = !showClipped">
+          {{ showClipped ? 'Less' : 'Read more' }}
+        </button>
       </div>
 
       <!-- buttons -->
