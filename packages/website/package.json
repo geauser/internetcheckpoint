@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^10.1.2",
+    "dayjs": "^1.11.8",
     "media-chrome": "^1.0.0"
   }
 }

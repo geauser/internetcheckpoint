@@ -13,6 +13,7 @@ export interface CommentTable {
   importedAuthorPhoto: string | null,
   votes: number,
   repliesCount: number,
+  score?: number,
   createdAt?: Date | null,
 }
 
