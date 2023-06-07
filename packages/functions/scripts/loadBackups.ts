@@ -63,7 +63,21 @@ for (const file of files) {
         }
       })();
 
+      const isReply = comment.cid.includes('.');
+
       const createdAt = dayjs('2021-04-07').subtract(value, unit).toDate();
+      const votes = parseInt(comment.votes, 10);
+      const repliesCount = repliesCounts[comment.cid] ?? 0;
+
+      const standardDeviation = 1000, peak = 1500, height = 1;
+
+      const score =
+        Math.max(repliesCount, 1) *
+        (Math.max(votes, 1) / 3) *
+        height * Math.exp(
+          -Math.pow(comment.text.length - peak, 2) /
+          (2 * Math.pow(standardDeviation, 2))
+        );
 
       comments.push({
         id: comment.cid,
@@ -72,8 +86,9 @@ for (const file of files) {
         text: comment.text,
         importedAuthorName: comment.author,
         importedAuthorPhoto: comment.photo,
-        votes: parseInt(comment.votes, 10),
-        repliesCount: repliesCounts[comment.cid] ?? 0,
+        votes,
+        repliesCount,
+        score: isReply ? null : score,
         createdAt,
       });
 
@@ -83,6 +98,31 @@ for (const file of files) {
 
 };
 
+
+if (process.argv[2] === 'update') {
+
+  let promises = [];
+
+  for (let i = 0; i < comments.length; i++) {
+
+    promises.push(db
+      .updateTable('comment')
+      .where('id', '=', comments[i].id)
+      .set({
+        createdAt: comments[i].createdAt,
+        score: comments[i].score,
+      })
+      .execute());
+
+    if (promises.length % 100 === 0 || promises.length === comments.length) {
+      await Promise.all(promises);
+      console.log('Updated', `${promises.length}/${comments.length}`, '...');
+    }
+
+  }
+
+  process.exit(0);
+} 
 
 let inserted = 0;
 // Use chunk to avoid issues with planetscale
