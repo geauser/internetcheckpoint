@@ -6,7 +6,7 @@ const config = useRuntimeConfig();
 
 const siteName    = 'Internet Checkpoint';
 const title       = 'Internet Checkpoint';
-const description = 'A live backup of the "internet checkpoint" by taia777';
+const description = 'A re-creation of the internet checkpoint comment sections';
 const image       = `https://${config.public.appDomain}/images/og.jpg`;
 
 
