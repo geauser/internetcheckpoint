@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import dayjs from 'dayjs';
 import { CommentTable, db } from 'planetscale/db';
 
 
@@ -46,6 +47,24 @@ for (const file of files) {
         throw new Error('Votes is not a number');
       }
 
+      const time = comment.time.replace('eest', '').replace('(muudetud)', '');
+      const value = parseInt(time.split(' ')[0]);
+
+      const unit  = (() => {
+        switch (time.split(' ')[1]) {
+          case 'sekundi': return 'second';
+          case 'minuti': return 'minute';
+          case 'tunni': return 'hour';
+          case 'päeva': return 'day';
+          case 'kuu': return 'month';
+          case 'aasta': return 'year';
+          case 'nädala': return 'week';
+          default: throw new Error('Unknown unit');
+        }
+      })();
+
+      const createdAt = dayjs('2021-04-07').subtract(value, unit).toDate();
+
       comments.push({
         id: comment.cid,
         authorUid: null,
@@ -55,6 +74,7 @@ for (const file of files) {
         importedAuthorPhoto: comment.photo,
         votes: parseInt(comment.votes, 10),
         repliesCount: repliesCounts[comment.cid] ?? 0,
+        createdAt,
       });
 
     } catch (err) {}
