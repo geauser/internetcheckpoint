@@ -8,6 +8,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const repliesOf  = event.queryStringParameters?.repliesOf ?? null;
   const batchIndex = parseInt(event.queryStringParameters?.batch ?? '0', 10);
   const isLoadingReplies = !!repliesOf;
+  const isNotLoadingReplies = !isLoadingReplies;
   const batchSize = isLoadingReplies ? 10 : 100;
 
   const { rows } = await sql<{ total: number }>`SELECT count(*) as total FROM comment`.execute(db);
@@ -15,11 +16,17 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
   const comments = await db
     .selectFrom('comment')
-    .$if(isLoadingReplies, q => q.where('id', 'like', `${repliesOf}.%`))
-    .$if(!isLoadingReplies, q => q.where('id', 'not like', `%.%`))
+    .$if(isLoadingReplies, q => {
+      return q
+        .where('id', 'like', `${repliesOf}.%`)
+        .orderBy('createdAt', 'asc');
+    })
+    .$if(isNotLoadingReplies, q => {
+      return q
+        .where('id', 'not like', `%.%`)
+        .orderBy('score', 'desc');
+    })
     .selectAll()
-    .orderBy('votes', 'desc')
-    .orderBy('repliesCount')
     .offset(batchIndex * batchSize)
     .limit(batchSize)
     .execute();
