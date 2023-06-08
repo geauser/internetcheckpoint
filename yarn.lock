@@ -8157,6 +8157,11 @@ tsx@^3.12.7:
   optionalDependencies:
     fsevents "~2.3.2"
 
+ttab@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/ttab/-/ttab-0.8.0.tgz#59e3b7c1b5bd69eba117e8d75903331925491602"
+  integrity sha512-ZsvrLuAJf52Joqo9aiLg1iygGz2l/hC5dKRrQ7W+k0LI7SN6m9bdF5hbpFm7WxEO4xE/pMMjFizd/5fdpNhoTA==
+
 type-detect@^4.0.0, type-detect@^4.0.5:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"

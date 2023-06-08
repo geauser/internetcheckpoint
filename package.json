@@ -18,6 +18,7 @@
     "constructs": "10.1.156",
     "sst": "^2.11.6",
     "tsx": "^3.12.7",
+    "ttab": "^0.8.0",
     "typescript": "^5.0.4"
   },
   "workspaces": [
