@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     },
   },
   gtag: {
-    id: { NUXT_GA_ID },
+    id: NUXT_GA_ID,
   },
   runtimeConfig: {
     public: {
