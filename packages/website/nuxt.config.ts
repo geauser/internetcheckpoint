@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-const { NUXT_GOOGLE_ANALYTICS_ID, NUXT_API_URL, NUXT_APP_DOMAIN } = process.env;
+const { NUXT_GA_ID, NUXT_API_URL, NUXT_APP_DOMAIN } = process.env;
 
 export default defineNuxtConfig({
   vue: {
@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   },
   css: ['~/assets/css/main.css'],
   modules: [
+    'nuxt-gtag',
     [
       '@nuxtjs/google-fonts', {
         families: {
@@ -26,7 +27,9 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  ...(NUXT_GOOGLE_ANALYTICS_ID ? ({ gtag: { id: NUXT_GOOGLE_ANALYTICS_ID } }) : {}),
+  gtag: {
+    id: NUXT_GA_ID,
+  },
   runtimeConfig: {
     public: {
       appDomain: NUXT_APP_DOMAIN ?? 'internetcheckpoint.page',

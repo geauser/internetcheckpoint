@@ -23,7 +23,7 @@ export function WebStack({ stack, app }: StackContext) {
     environment: {
       NUXT_APP_DOMAIN: app.stage === 'prod' ? 'internetcheckpoint.page':  'dev.internetcheckpoint.page',
       NUXT_API_URL: api.url,
-      NUXT_GOOGLE_ANALYTICS_ID: stack.stage === 'prod' ? 'G-43W5RSPT9Y' : '',
+      NUXT_GA_ID: 'G-43W5RSPT9Y',
     },
   });
 
