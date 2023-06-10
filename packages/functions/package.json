@@ -6,7 +6,7 @@
     "test": "sst bind vitest",
     "typecheck": "tsc -noEmit",
     "create-migration": "tsx ./scripts/createMigration.ts",
-    "migration": "tsx ./scripts/createMigration.ts",
+    "seed": "tsx ./scripts/seed.ts",
     "migrate": "sst bind tsx ./scripts/migrate.ts"
   },
   "devDependencies": {

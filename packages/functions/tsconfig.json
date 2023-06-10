@@ -1,10 +1,12 @@
 {
   "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
+    "resolveJsonModule": true,
     "module": "esnext",
     "baseUrl": ".",
     "paths": {
       "database": ["./planetscale/db.ts"],
+      "backups/*": ["../../backups/*"],
     }
   }
 }
