@@ -6,6 +6,7 @@ import { Config } from "sst/node/config";
 
 export interface CommentTable {
   id: string,
+  videoId: string,
   authorUid: string | null
   authorChannelId: string | null,
   text: string,
@@ -17,8 +18,18 @@ export interface CommentTable {
   createdAt?: Date | null,
 }
 
+export interface VideoTable {
+  id: string,
+  title: string,
+  viewCount: number,
+  likeCount: number,
+  dislikeCount: number,
+  publishedAt: Date,
+}
+
 interface Database {
-  comment: CommentTable;
+  comment: CommentTable,
+  video: VideoTable,
 }
 
 export const db = new Kysely<Database>({

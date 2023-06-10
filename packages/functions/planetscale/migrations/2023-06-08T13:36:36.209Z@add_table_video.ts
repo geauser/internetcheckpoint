@@ -4,7 +4,7 @@ import { Kysely, sql } from 'kysely'
 
 export async function up(db: Kysely<any>): Promise<void> {
 
-  await db.schema 
+  await db.schema
     .createTable('video')
     .addColumn('id', 'varchar(255)', (col) => col.primaryKey())
     .addColumn('title', 'varchar(1000)')
@@ -12,7 +12,6 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn('likeCount', 'integer')
     .addColumn('dislikeCount', 'integer')
     .addColumn('publishedAt', 'timestamp')
-    .addColumn('thumbnailUrl', 'varchar(1000)')
     .execute();
 
 }
