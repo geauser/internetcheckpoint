@@ -94,7 +94,7 @@ for (const file of files) {
     // 'tuh' means 'thousand' in Estonian
     // it's the equivalent of 'k' in English
     if (comment.votes.includes('tuh')) {
-      comment.votes = parseInt(comment.votes.replace('tuh', ''), 10) * 1000;
+      comment.votes = parseFloat(comment.votes.replace(' tuh', '').replace(',', '.')) * 1000;
     }
 
     const isReply = comment.cid.includes('.');
