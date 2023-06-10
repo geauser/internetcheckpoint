@@ -1,19 +1,33 @@
 <script lang="ts" setup>
 import { type CommentTable } from '@internetcheckpoint/functions/planetscale/db';
+import { useElementVisibility } from '@vueuse/core';
 
 defineProps<{
+  hideMeta?: boolean,
   totalComments: number,
   comments: CommentTable[],
   loading: boolean,
 }>();
+
+
+const scrollObserver = ref(null);
+const isVisible = useElementVisibility(scrollObserver);
+
+const emits = defineEmits(['loadMore']);
+
+watch(isVisible, async () => {
+  if (!isVisible.value) return;
+  emits('loadMore');
+});
+
 </script>
 
 <template>
   <ol class="space-y-4">
 
-    <div class="flex justify-between mb-10" :class="{ 'opacity-0': comments.length === 0 }">
+    <div class="flex justify-between" :class="{ 'opacity-0': comments.length === 0 }">
 
-      <div class="inline-flex items-center space-x-8">
+      <div v-if="!hideMeta" class="inline-flex items-center space-x-8">
 
         <p class="text-stone-700 font-medium">{{ totalComments }} comments</p>
 
@@ -36,7 +50,9 @@ defineProps<{
 
     </li>
 
-    <div class="flex justify-center w-full mt-6">
+    <div ref="scrollObserver"></div>
+
+    <div class="flex justify-center w-full mt-6 pb-4">
       <CircleLoading v-if="loading" class="border-stone-400 h-5 w-5 mx-auto" />
     </div>
 
