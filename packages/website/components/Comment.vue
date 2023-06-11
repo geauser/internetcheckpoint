@@ -20,6 +20,12 @@ const showClipped    = ref(false);
 
 const textEl = ref<HTMLParagraphElement>();
 
+const formatToYoutubeCount = (value: number) => {
+  if (value < 1000) return value;
+  return (value / 1000) + 'K';
+}
+
+
 onMounted(() => {
   needClipping.value = textEl.value?.scrollHeight! > textEl.value?.clientHeight!;
 });
@@ -32,7 +38,7 @@ async function loadReplies() {
 
     loadingReplies.value = true;
 
-    const { data } = await useFetch<{ comments: CommentTable[] }>(`${config.public.apiUrl}/comments?repliesOf=${props.comment.id}&batch=${batchIndex.value}`);
+    const { data } = await useFetch<{ comments: CommentTable[] }>(`${config.public.apiUrl}/comments?repliesOf=${props.comment.id}&batch=${batchIndex.value}&videoId=`);
     replies.value.push(...data.value?.comments!);
     canFetchMore.value = data.value?.comments.length === 10;
     batchIndex.value++;
@@ -78,7 +84,7 @@ function toggleReplies() {
         </div>
         <p ref="textEl" class="text-sm" :class="{ 'line-clamp-5 sm:line-clamp-4': !showClipped }">{{ comment.text }}</p>
         <button
-          v-if="needClipping" 
+          v-if="needClipping"
           class="font-medium text-sm text-stone-600 mt-1 hover:underline"
           @click="showClipped = !showClipped">
           {{ showClipped ? 'Less' : 'Read more' }}
@@ -95,7 +101,7 @@ function toggleReplies() {
               <path d="M 14.167969 1 L 7.5839844 7.5957031 C 7.2118359 7.9688467 7.0020678 8.4738186 7 9 L 1 9 L 1 21 L 7 21 C 7.3660536 21 7.7049394 20.894189 8 20.722656 C 8.2950606 20.894189 8.6339464 21 9 21 L 17.992188 21 C 18.791187 21 19.514078 20.524062 19.830078 19.789062 L 22.837891 12.787109 C 22.944891 12.538109 23 12.269047 23 11.998047 L 23 10 C 23 8.895 22.105 8 21 8 L 14.648438 8 L 15.585938 3.703125 C 15.731938 3.032125 15.523203 2.3345156 15.033203 1.8535156 L 14.167969 1 z M 13.326172 4.6738281 L 12.695312 7.5742188 L 12.167969 10 L 14.650391 10 L 21 10 L 21 11.998047 L 17.992188 19 L 9 19 L 9 11 L 9 9.0078125 L 13.326172 4.6738281 z M 3 11 L 7 11 L 7 19 L 3 19 L 3 11 z"></path>
             </svg>
           </button>
-          <span v-if="comment.votes" class="text-xs font-medium">{{ comment.votes }}</span>
+          <span v-if="comment.votes" class="text-xs font-medium">{{ formatToYoutubeCount(comment.votes) }}</span>
         </div>
 
         <!-- dislike button -->

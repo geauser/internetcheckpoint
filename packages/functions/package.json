@@ -5,13 +5,14 @@
   "scripts": {
     "test": "sst bind vitest",
     "typecheck": "tsc -noEmit",
-    "loadBackups": "sst bind tsx ./scripts/loadBackups.ts",
-    "migration": "tsx ./scripts/createMigration.ts",
-    "migrate": "sst bind tsx ./scripts/runMigration.ts"
+    "create-migration": "tsx ./scripts/createMigration.ts",
+    "seed": "sst bind tsx ./scripts/seed.ts",
+    "migrate": "sst bind tsx ./scripts/migrate.ts"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.115",
     "@types/node": "^20.2.5",
+    "kysely-migration-cli": "^0.2.1",
     "mysql2": "^3.3.3",
     "sst": "^2.11.6",
     "vitest": "^0.31.4"
