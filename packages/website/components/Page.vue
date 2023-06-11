@@ -103,7 +103,7 @@ function toggleResponsiveComments() {
         autoplay
         type="video/mp4"
         :poster="`/images/thumbnails/${videoId}.jpg`"
-        :src="`/videos/${videoId}.mp4`"></video>
+        :src="`https://cdn.internetcheckpoint.page/videos/${videoId}.mp4`"></video>
 
       <media-control-bar class="group-hover:!opacity-100 relative !transition-opacity">
 
