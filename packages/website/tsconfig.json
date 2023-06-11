@@ -1,9 +1,10 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
+  "resolveJsonModule": true,
   "compilerOptions": {
     "paths": {
-      "@internetcheckpoint/functions": ["../functions/*"],
+      "@internetcheckpoint/functions": ["../functions/*"]
     }
   }
 }

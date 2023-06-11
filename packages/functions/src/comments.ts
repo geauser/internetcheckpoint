@@ -5,13 +5,14 @@ import { sql } from "kysely";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
+  const videoId = event.queryStringParameters?.videoId ?? null;
   const repliesOf  = event.queryStringParameters?.repliesOf ?? null;
   const batchIndex = parseInt(event.queryStringParameters?.batch ?? '0', 10);
   const isLoadingReplies = !!repliesOf;
   const isNotLoadingReplies = !isLoadingReplies;
   const batchSize = isLoadingReplies ? 10 : 100;
 
-  const { rows } = await sql<{ total: number }>`SELECT count(*) as total FROM comment`.execute(db);
+  const { rows } = await sql<{ total: number }>`SELECT count(*) as total FROM comment WHERE videoId = ${videoId}`.execute(db);
   const total = rows[0].total;
 
   const comments = await db
@@ -23,6 +24,7 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     })
     .$if(isNotLoadingReplies, q => {
       return q
+        .where('videoId', '=', videoId)
         .where('id', 'not like', `%.%`)
         .orderBy('score', 'desc');
     })

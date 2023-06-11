@@ -12,3 +12,5 @@ node_modules
 .DS_Store
 
 *.env
+
+packages/website/public/videos/
