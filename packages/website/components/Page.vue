@@ -97,9 +97,12 @@ function toggleResponsiveComments() {
         slot="media"
         ref="video"
         autoplay
+        playsinline
         type="video/mp4"
         :poster="`/images/thumbnails/${videoId}.jpg`"
         :src="`https://cdn.internetcheckpoint.page/videos/${videoId}.mp4`"></video>
+
+      <media-loading-indicator slot="centered-chrome"></media-loading-indicator>
 
       <media-control-bar class="relative !transition-opacity">
 
