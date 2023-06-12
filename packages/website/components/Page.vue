@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { type CommentTable } from '@internetcheckpoint/functions/planetscale/db';
-import { useBreakpoints, useElementVisibility, breakpointsTailwind } from '@vueuse/core';
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
 import metadata from '../../../backups/_metadata.json';
 
 
