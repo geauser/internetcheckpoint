@@ -91,11 +91,7 @@ function toggleResponsiveComments() {
 
   <div class="aspect-video w-full group fixed sm:relative z-50 mt-11 sm:mt-0" id="js-video">
 
-    <div
-      class="absolute w-full bottom-0 bg-gradient-to-b from-transparent to-black h-40 group-hover:opacity-70 opacity-0 transition-opacity pointer-events-none"
-      :class="{ 'opacity-70': videoIsPaused }"></div>
-
-    <media-controller class="absolute w-full h-full bg-transparent bottom-0 group-focus:!opacity-100">
+    <media-controller class="absolute w-full h-full bg-transparent bottom-0">
 
       <video
         slot="media"
@@ -105,13 +101,19 @@ function toggleResponsiveComments() {
         :poster="`/images/thumbnails/${videoId}.jpg`"
         :src="`https://cdn.internetcheckpoint.page/videos/${videoId}.mp4`"></video>
 
-      <media-control-bar class="group-hover:!opacity-100 relative !transition-opacity">
+      <media-control-bar class="relative !transition-opacity">
 
-        <media-play-button class="bg-transparent"></media-play-button>
-        <media-mute-button class="bg-transparent"></media-mute-button>
-        <media-volume-range class="bg-transparent"></media-volume-range>
-        <media-time-display showduration class="text-sm text-[13px] bg-transparent"></media-time-display>
-        <media-time-range class="absolute h-6 bottom-10 w-full bg-transparent"></media-time-range>
+        <media-play-button class="z-50 bg-transparent"></media-play-button>
+        <media-mute-button class="z-50 bg-transparent"></media-mute-button>
+        <media-volume-range class="z-50 bg-transparent"></media-volume-range>
+        <media-time-display showduration class="z-50 text-sm text-[13px] bg-transparent"></media-time-display>
+        <media-time-range class="z-50 absolute h-6 bottom-10 w-full bg-transparent"></media-time-range>
+
+        <div
+          class="absolute w-full bottom-0 bg-gradient-to-b from-transparent to-black h-40 group-hover:opacity-70 opacity-0 transition-opacity pointer-events-none"
+          :class="{ 'opacity-70': videoIsPaused }">
+        </div>
+
       </media-control-bar>
     </media-controller>
 
