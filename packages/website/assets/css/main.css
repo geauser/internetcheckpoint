@@ -12,7 +12,7 @@
     px-2 py-1.5
     shadow-sm
     border border-stone-300 rounded-[4px]
-    text-xs text-stone-950
+    text-sm text-stone-950
     font-medium
     transition-colors
     hover:bg-stone-50
@@ -20,12 +20,27 @@
     active:shadow-none active:shadow-inner active:bg-stone-100/80;
 }
 
+.button-dark {
+  @apply
+    inline-flex items-center
+    px-2 py-1.5
+    shadow-sm
+    rounded-[4px]
+    bg-stone-950
+    text-sm text-white
+    font-medium
+    transition-colors
+    hover:bg-stone-800
+    disabled:opacity-70;
+}
+
 .button-ghost {
   @apply
     inline-flex items-center
     px-2 py-1.5
-    text-xs text-stone-950
+    text-sm text-stone-950
     font-medium
+    rounded-[4px]
     transition-colors
     hover:bg-stone-100;
 }

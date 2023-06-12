@@ -8,6 +8,7 @@ export function ApiStack({ stack, app }: StackContext) {
     defaults: {
       function: {
         runtime: 'nodejs18.x',
+        timeout: 30,
       },
     },
     ...(['prod', 'dev'].includes(app.stage) && {

@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     [
       '@nuxtjs/google-fonts', {
         families: {
-          Roboto: [400, 500, 600],
+          Roboto: [400, 500, 600, 700],
         },
         display: 'swap',
         prefetch: true,
