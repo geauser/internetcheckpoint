@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import 'media-chrome';
 
+
 const config = useRuntimeConfig();
 
 
@@ -26,15 +27,41 @@ useSeoMeta({
   ogImage: image,
 });
 
+const submittedEmail = ref(false);
+const showModal = ref(false);
+
+
+async function submitEmail(event: Event) {
+
+  const data = new FormData(event?.target as HTMLFormElement);
+
+  await fetch('https://formspree.io/f/xvonepda', {
+    method: 'POST',
+    body: data,
+    headers: {
+      'Accept': 'application/json',
+    },
+  });
+
+  submittedEmail.value = true;
+}
+
+function toggleModal() {
+  showModal.value = !showModal.value;
+  submittedEmail.value = false;
+}
+
 </script>
 
 <template>
 
 
-  <div class="flex flex-col sm:flex-row justify-center pb-10 bg-white">
+  <div
+    class="flex flex-col sm:flex-row justify-center pb-10 bg-white transition-all"
+    :class="{ 'blur-sm': showModal }">
     <div class="flex-1 max-w-4xl sm:px-10">
 
-      <header id="js-header" class="fixed sm:relative top-0 z-50 w-full flex justify-end items-center bg-white max-w-4xl px-4 sm:px-0 pb-2 sm:pb-6 pt-2 sm:pt-4">
+      <header id="js-header" class="fixed sm:relative top-0 z-50 w-full flex justify-between items-center bg-white max-w-4xl px-4 sm:px-0 pb-2 sm:pb-6 pt-2 sm:pt-4">
 
         <nav class="inline-flex items-center space-x-2">
 
@@ -57,11 +84,87 @@ useSeoMeta({
           </a>
 
         </nav>
+
+        <button class="button-dark relative !px-3 font-medium text-sm no-antialiased" @click="toggleModal">
+          <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" class="h-4 fill-stone-200 mr-2" viewBox="0 0 24 24">
+            <path d="M 9 2 C 5.1458514 2 2 5.1458514 2 9 C 2 12.854149 5.1458514 16 9 16 C 10.747998 16 12.345009 15.348024 13.574219 14.28125 L 14 14.707031 L 14 16 L 20 22 L 22 20 L 16 14 L 14.707031 14 L 14.28125 13.574219 C 15.348024 12.345009 16 10.747998 16 9 C 16 5.1458514 12.854149 2 9 2 z M 9 4 C 11.773268 4 14 6.2267316 14 9 C 14 11.773268 11.773268 14 9 14 C 6.2267316 14 4 11.773268 4 9 C 4 6.2267316 6.2267316 4 9 4 z"></path>
+          </svg>
+          Find your Checkpoints
+        </button>
+
       </header>
 
       <NuxtPage />
     </div>
     <SideNav class="mt-6 sm:mt-[68px]"/>
+  </div>
+
+  <div v-if="showModal" class="fixed top-0 left-0 w-full h-full bg-black/20" @click="showModal = false"/>
+
+  <div v-if="showModal" class="fixed left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-50">
+
+    <div class="relative bg-white w-full max-w-[350px] rounded-md overflow-hidden">
+
+      <button
+        class="absolute z-50 top-2 right-2 p-1 rounded-full hover:bg-stone-300"
+        @click="showModal = false">
+        <svg xmlns="http://www.w3.org/2000/svg"
+          x="0px" y="0px"
+          viewBox="0 0 24 24"
+          class="h-4">
+          <path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"></path>
+        </svg>
+      </button>
+
+      <div class="absolute px-8 flex flex-col justify-center items-center top-0 left-0 w-full h-full" v-if="submittedEmail">
+
+        <h1 class="font-bold text-stone-950 text-center text-4xl mb-2">You're set! 🎉</h1>
+        <p class="text-stone-700 text-sm text-center">You'll receive an email when the feature is available.</p>
+
+      </div>
+
+      <div
+        class="px-6 pb-6 pt-6"
+        :class="[ submittedEmail ? 'opacity-0 pointer-events-none' : '']">
+
+          <h1 class="font-bold text-black text-center text-3xl mb-2">Coming Soon</h1>
+
+          <p class="text-sm text-center mt-4 text-stone-700">
+            <!-- Thanks to <a href="#" target="_blank" class="font-medium text-stone-700 underline decoration-dashed">Rebane</a> all the videos of taia777
+            along with most of their comments were saved. -->
+            Get notified when the ability to restore your checkpoints is out 👍
+          </p>
+
+
+          <!-- <p class="text-sm font-light no-antialiased mt-6 text-stone-950">
+            As many of you know, Nintento and other companies brought down the
+            channel of taia777 for copyright violation.
+          </p>
+
+
+          <p class="text-sm font-light no-antialiased mt-6 text-stone-950">
+            Due to the quality of <a href="#" target="_blank" class="font-medium text-stone-700 underline decoration-dashed">Rebane</a> archive, the comments
+            in the backup contains the channel id of it's author, meaning we can find who posted what comment.
+          </p> -->
+
+
+          <form class="flex flex-col mt-4" @submit.prevent="submitEmail">
+            <input
+              class="w-full py-1.5 pl-4 placeholder:text-stone-500 bg-white shadow-sm border border-stone-300 rounded-[4px] text-stone-950 text-sm"
+              type="email"
+              name="email"
+              placeholder="Email"/>
+            <div class="flex justify-end space-x-3 mt-3">
+              <button class="button-ghost" @click="showModal = false">Cancel</button>
+              <button type="submit" class="button-dark">Subscribe</button>
+            </div>
+          </form>
+
+
+      </div>
+
+    </div>
+
   </div>
 
 </template>

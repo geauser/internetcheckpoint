@@ -87,7 +87,7 @@ function toggleResponsiveComments() {
 
 <template>
 
-  <div class="aspect-video w-full group fixed sm:relative z-50 mt-11 sm:mt-0" id="js-video">
+  <div class="aspect-video w-full group fixed sm:relative z-50 mt-12 sm:mt-0" id="js-video">
 
     <media-controller class="absolute w-full h-full bg-transparent bottom-0">
 
