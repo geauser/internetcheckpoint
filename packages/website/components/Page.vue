@@ -10,12 +10,11 @@ const props = defineProps<{
 
 const config = useRuntimeConfig();
 const comments = ref<CommentTable[]>([]);
-const totalComments = ref(0);
 const loadingComments = ref(false);
 const batchIndex = ref(0);
 const showResponsiveComments = ref(false);
 
-const { likeCount, dislikeCount, viewCount, title } = metadata[props.videoId];
+const { likeCount, dislikeCount, viewCount, title, commentsCount } = metadata[props.videoId];
 
 const formatToYoutubeCount = (value: number) => {
   if (value < 1000) return value;
@@ -35,10 +34,9 @@ async function loadComments() {
     loadingComments.value = true;
 
     const res = await fetch(`${config.public.apiUrl}/comments?batch=${batchIndex.value}&videoId=${props.videoId}`);
-    const data = (await res.json()) as { total: number, comments: CommentTable[] };
+    const data = (await res.json()) as { comments: CommentTable[] };
 
 
-    totalComments.value = data?.total ?? 0;
     comments.value.push(...(data?.comments! ?? []));
     batchIndex.value++;
 
@@ -167,10 +165,10 @@ function toggleResponsiveComments() {
   </div>
 
   <button
-    v-if="totalComments > 0 && isOnMobile"
+    v-if="commentsCount > 0 && isOnMobile"
     class="flex items-center justify-between text-sm w-full text-stone-800 border-b border-stone-200 px-4 text-left py-2.5"
     @click="toggleResponsiveComments">
-    <p>Comments <span class="mx-1">•</span> {{ useYoutubeFormat(totalComments) }}</p>
+    <p>Comments <span class="mx-1">•</span> {{ useYoutubeFormat(commentsCount) }}</p>
 
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -187,7 +185,7 @@ function toggleResponsiveComments() {
     class="bg-white w-full fixed h-full bottom-0 left-0 right-0 z-40 border-t border-stone-200 rounded-t-md">
 
       <header class="flex justify-between items-center px-4 pt-2 pb-2 border-b border-stone-200 shadow-sm">
-        <h1 class="font-medium text-lg text-stone-950">Comments <span class="font-normal text-sm ml-4 text-stone-700">{{ totalComments }}</span></h1>
+        <h1 class="font-medium text-lg text-stone-950">Comments <span class="font-normal text-sm ml-4 text-stone-700">{{ commentsCount }}</span></h1>
         <button @click="toggleResponsiveComments">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -203,7 +201,7 @@ function toggleResponsiveComments() {
 
         <Comments
           :hide-meta="true"
-          :total-comments="totalComments"
+          :comments-count="commentsCount"
           :comments="comments"
           :loading="loadingComments"
           @load-more="loadComments" />
@@ -220,7 +218,7 @@ function toggleResponsiveComments() {
   <Comments
     v-if="!isOnMobile"
     class="mt-4"
-    :total-comments="totalComments"
+    :comments-count="commentsCount"
     :comments="comments"
     :loading="loadingComments"
     @load-more="loadComments" />

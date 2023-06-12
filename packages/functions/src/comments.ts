@@ -12,9 +12,6 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const isNotLoadingReplies = !isLoadingReplies;
   const batchSize = isLoadingReplies ? 10 : 100;
 
-  const { rows } = await sql<{ total: number }>`SELECT count(*) as total FROM comment WHERE videoId = ${videoId}`.execute(db);
-  const total = rows[0].total;
-
   const comments = await db
     .selectFrom('comment')
     .$if(isLoadingReplies, q => {
@@ -37,6 +34,6 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   return {
     statusCode: 200,
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ total, comments }),
+    body: JSON.stringify({ comments }),
   };
 };

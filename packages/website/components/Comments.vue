@@ -4,7 +4,7 @@ import { useElementVisibility } from '@vueuse/core';
 
 defineProps<{
   hideMeta?: boolean,
-  totalComments: number,
+  commentsCount: number,
   comments: CommentTable[],
   loading: boolean,
 }>();
@@ -29,7 +29,7 @@ watch(isVisible, async () => {
 
       <div v-if="!hideMeta" class="inline-flex items-center space-x-8">
 
-        <p class="text-stone-700 font-medium">{{ totalComments }} comments</p>
+        <p class="text-stone-700 font-medium">{{ commentsCount }} comments</p>
 
         <button class="inline-flex items-center space-x-2 text-sm text-stone-950">
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 24 24" class="h-6 w-6 mr-1 fill-stone-400">
