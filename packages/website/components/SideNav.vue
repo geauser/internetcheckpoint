@@ -4,15 +4,18 @@ import metadata from '../../../backups/_metadata.json'
 import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime)
 
-const links = Object.keys(metadata).map((videoId) => {
-  const { title, viewCount, publishedAt } = metadata[videoId as keyof typeof metadata];
-  return {
-    videoId,
-    title,
-    viewCount,
-    publishedAt,
-  }
-}).sort((a, b) => a.viewCount < b.viewCount ? 1 : -1);
+const route = useRoute();
+
+const links = computed(() => {
+
+  return Object.keys(metadata).map((videoId) => {
+    const { title, viewCount, publishedAt } = metadata[videoId as keyof typeof metadata];
+    return { videoId, title, viewCount, publishedAt };
+  })
+  .sort((a, b) => a.viewCount < b.viewCount ? 1 : -1)
+  .filter(link => link.videoId !== route.params.id);
+
+});
 
 </script>
 
