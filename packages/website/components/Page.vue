@@ -87,7 +87,7 @@ function toggleResponsiveComments() {
 
 <template>
 
-  <div class="aspect-video w-full group fixed sm:relative z-50 mt-12 sm:mt-0" id="js-video">
+  <div class="aspect-video w-full group fixed sm:relative z-50 mt-14 sm:mt-0" id="js-video">
 
     <media-controller class="absolute w-full h-full bg-transparent bottom-0">
 
@@ -97,7 +97,7 @@ function toggleResponsiveComments() {
         autoplay
         playsinline
         type="video/mp4"
-        :poster="`/images/thumbnails/${videoId}.jpg`"
+        :poster="`/images/thumbnails/${videoId}.webp`"
         :src="`https://cdn.internetcheckpoint.page/videos/${videoId}.mp4`"></video>
 
       <media-loading-indicator slot="centered-chrome"></media-loading-indicator>
@@ -120,7 +120,7 @@ function toggleResponsiveComments() {
 
   </div>
 
-  <div class="sm:hidden w-full aspect-video mt-11"></div>
+  <div class="sm:hidden w-full aspect-video mt-14"></div>
 
   <div class="mt-4">
 
@@ -152,15 +152,35 @@ function toggleResponsiveComments() {
       </div>
     </div>
 
-    <div class="flex items-center space-x-3 mt-3 border-b border-stone-200 pb-4 px-4 sm:px-0">
-      <div
-        class="w-10 h-10 rounded-full bg-center bg-contain"
-        style="background-image: url('https://yt3.ggpht.com/CBRr0hQOzp1NC5OSbYD_noMkx8sFIht0TqpOjjguy8DDPN0ux0vgVu1PygQXNJvDJqi8GD77=s176-c-k-c0x00ffffff-no-rj-mo');">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-3 border-b border-stone-200 pb-4 px-4 sm:px-0">
+
+      <div class="inline-flex space-x-3">
+
+        <NuxtImg
+          format="webp"
+          class="w-10 h-10 rounded-full bg-center bg-contain"
+          height="40"
+          width="40"
+          src="https://yt3.ggpht.com/CBRr0hQOzp1NC5OSbYD_noMkx8sFIht0TqpOjjguy8DDPN0ux0vgVu1PygQXNJvDJqi8GD77=s176-c-k-c0x00ffffff-no-rj-mo"
+        />
+        <div class="flex flex-col justify-center">
+          <p class="font-semibold text-base/6 text-stone-900 mt-0.5">taia777</p>
+          <span class="text-xs text-stone-700">71.8K subscribers</span>
+        </div>
+
       </div>
-      <div class="flex flex-col justify-center">
-        <p class="font-semibold text-base/6 text-stone-900 mt-0.5">taia777</p>
-        <span class="text-xs text-stone-700">71.8K subscribers</span>
+
+      <div class="inline-flex mt-4 sm:mt-0 items-center text-stone-700 bg-stone-100 rounded-full border border-stone-200 px-2 py-0.5 text-xs self-center sm:self-end">
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 24 24" class="h-4 mr-1 fill-yellow-500">
+          <path d="M 12 1 L 10.082031 6.1152344 L 4 4 L 6.1152344 10.082031 L 1 12 L 6.1152344 13.917969 L 4 20 L 10.082031 17.884766 L 12 23 L 13.917969 17.884766 L 20 20 L 17.884766 13.917969 L 23 12 L 17.884766 10.082031 L 20 4 L 13.917969 6.1152344 L 12 1 z M 12 6.6953125 L 13.126953 9.7011719 L 13.445312 10.552734 L 14.296875 10.871094 L 17.304688 12 L 14.298828 13.126953 L 13.447266 13.445312 L 13.128906 14.296875 L 12 17.304688 L 10.873047 14.298828 L 10.554688 13.447266 L 9.703125 13.128906 L 6.6953125 12 L 9.7011719 10.873047 L 10.552734 10.554688 L 10.871094 9.703125 L 12 6.6953125 z"></path>
+        </svg>
+        <span>Made possible by <a
+          href="https://www.reddit.com/r/taia777/comments/o1rls6/taia777_videos_and_comments_archive/"
+          target="_blank"
+          class="font-medium text-blue-700 hover:underline">rebane</a>
+        </span>
       </div>
+
     </div>
   </div>
 
@@ -209,10 +229,6 @@ function toggleResponsiveComments() {
       </div>
 
 
-  </div>
-
-  <div v-if="loadingComments && isOnMobile" class="m-auto text-center py-2">
-    <CircleLoading class="border-stone-400 h-5 w-5 mx-auto" />
   </div>
 
   <Comments
