@@ -87,7 +87,7 @@ function toggleResponsiveComments() {
 
 <template>
 
-  <div class="aspect-video w-full group fixed sm:relative z-50 mt-12 sm:mt-0" id="js-video">
+  <div class="aspect-video w-full group fixed sm:relative z-50 mt-14 sm:mt-0" id="js-video">
 
     <media-controller class="absolute w-full h-full bg-transparent bottom-0">
 
@@ -120,7 +120,7 @@ function toggleResponsiveComments() {
 
   </div>
 
-  <div class="sm:hidden w-full aspect-video mt-11"></div>
+  <div class="sm:hidden w-full aspect-video mt-14"></div>
 
   <div class="mt-4">
 
@@ -152,18 +152,24 @@ function toggleResponsiveComments() {
       </div>
     </div>
 
-    <div class="flex items-center space-x-3 mt-3 border-b border-stone-200 pb-4 px-4 sm:px-0">
-      <NuxtImg
-        format="webp"
-        class="w-10 h-10 rounded-full bg-center bg-contain"
-        height="40"
-        width="40"
-        src="https://yt3.ggpht.com/CBRr0hQOzp1NC5OSbYD_noMkx8sFIht0TqpOjjguy8DDPN0ux0vgVu1PygQXNJvDJqi8GD77=s176-c-k-c0x00ffffff-no-rj-mo"
-      />
-      <div class="flex flex-col justify-center">
-        <p class="font-semibold text-base/6 text-stone-900 mt-0.5">taia777</p>
-        <span class="text-xs text-stone-700">71.8K subscribers</span>
+    <div class="flex items-center justify-between mt-3 border-b border-stone-200 pb-4 px-4 sm:px-0">
+
+      <div class="inline-flex space-x-3">
+
+        <NuxtImg
+          format="webp"
+          class="w-10 h-10 rounded-full bg-center bg-contain"
+          height="40"
+          width="40"
+          src="https://yt3.ggpht.com/CBRr0hQOzp1NC5OSbYD_noMkx8sFIht0TqpOjjguy8DDPN0ux0vgVu1PygQXNJvDJqi8GD77=s176-c-k-c0x00ffffff-no-rj-mo"
+        />
+        <div class="flex flex-col justify-center">
+          <p class="font-semibold text-base/6 text-stone-900 mt-0.5">taia777</p>
+          <span class="text-xs text-stone-700">71.8K subscribers</span>
+        </div>
+
       </div>
+
     </div>
   </div>
 
@@ -212,10 +218,6 @@ function toggleResponsiveComments() {
       </div>
 
 
-  </div>
-
-  <div v-if="loadingComments && isOnMobile" class="m-auto text-center py-2">
-    <CircleLoading class="border-stone-400 h-5 w-5 mx-auto" />
   </div>
 
   <Comments
