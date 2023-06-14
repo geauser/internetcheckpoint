@@ -63,12 +63,10 @@ function toggleReplies() {
 
   <div class="flex flex-row space-x-4 items-start">
 
-    <div
-      role="img"
-      class=" bg-center bg-contain rounded-full flex-shrink-0"
+    <NuxtImg
+      class="bg-center bg-contain rounded-full flex-shrink-0"
       :class="[isReply ? 'w-6 h-6' : 'w-10 h-10']"
-      :style="{ backgroundImage: `url(${comment.importedAuthorPhoto})`}">
-    </div>
+      :src="comment.importedAuthorPhoto!" />
 
     <div class="w-full">
 

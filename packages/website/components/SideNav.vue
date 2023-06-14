@@ -32,17 +32,24 @@ const links = computed(() => {
         :to="`/${link.videoId}`">
 
         <div class="relative aspect-video flex-shrink-0 w-full sm:w-40 h-auto">
-          <img :src="`/images/thumbnails/${link.videoId}.jpg`" />
+          <NuxtImg
+            preload
+            class="w-full"
+            format="webp"
+            sizes="sm:160px xs:400px"
+            :src="`/images/thumbnails/${link.videoId}.webp`" />
           <!-- <span class="text-xs absolute bottom-1 right-1.5 text-white font-semibold bg-black/60 px-1 rounded-sm">1:01:42</span> -->
         </div>
 
 
         <div class="flex flex-row">
 
-          <div
+          <NuxtImg
+            format="webp"
+            width="32"
+            height="32"
             class="sm:hidden w-8 h-8 rounded-full flex-shrink-0 bg-center bg-contain mt-2 ml-2 mr-2"
-            style="background-image: url('https://yt3.ggpht.com/CBRr0hQOzp1NC5OSbYD_noMkx8sFIht0TqpOjjguy8DDPN0ux0vgVu1PygQXNJvDJqi8GD77=s176-c-k-c0x00ffffff-no-rj-mo');" />
-
+            src="https://yt3.ggpht.com/CBRr0hQOzp1NC5OSbYD_noMkx8sFIht0TqpOjjguy8DDPN0ux0vgVu1PygQXNJvDJqi8GD77=s176-c-k-c0x00ffffff-no-rj-mo" />
 
           <div class="flex-shrink pt-2 sm:pt-0">
 
