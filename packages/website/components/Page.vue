@@ -152,7 +152,7 @@ function toggleResponsiveComments() {
       </div>
     </div>
 
-    <div class="flex items-center justify-between mt-3 border-b border-stone-200 pb-4 px-4 sm:px-0">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-3 border-b border-stone-200 pb-4 px-4 sm:px-0">
 
       <div class="inline-flex space-x-3">
 
@@ -168,6 +168,17 @@ function toggleResponsiveComments() {
           <span class="text-xs text-stone-700">71.8K subscribers</span>
         </div>
 
+      </div>
+
+      <div class="inline-flex mt-4 sm:mt-0 items-center text-stone-700 bg-stone-100 rounded-full border border-stone-200 px-2 py-0.5 text-xs self-center sm:self-end">
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 24 24" class="h-4 mr-1 fill-yellow-500">
+          <path d="M 12 1 L 10.082031 6.1152344 L 4 4 L 6.1152344 10.082031 L 1 12 L 6.1152344 13.917969 L 4 20 L 10.082031 17.884766 L 12 23 L 13.917969 17.884766 L 20 20 L 17.884766 13.917969 L 23 12 L 17.884766 10.082031 L 20 4 L 13.917969 6.1152344 L 12 1 z M 12 6.6953125 L 13.126953 9.7011719 L 13.445312 10.552734 L 14.296875 10.871094 L 17.304688 12 L 14.298828 13.126953 L 13.447266 13.445312 L 13.128906 14.296875 L 12 17.304688 L 10.873047 14.298828 L 10.554688 13.447266 L 9.703125 13.128906 L 6.6953125 12 L 9.7011719 10.873047 L 10.552734 10.554688 L 10.871094 9.703125 L 12 6.6953125 z"></path>
+        </svg>
+        <span>Made possible by <a
+          href="https://www.reddit.com/r/taia777/comments/o1rls6/taia777_videos_and_comments_archive/"
+          target="_blank"
+          class="font-medium text-blue-700 hover:underline">rebane</a>
+        </span>
       </div>
 
     </div>
