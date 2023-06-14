@@ -13,6 +13,10 @@ if (cwd.split('/').pop() !== 'internetcheckpoint') {
 const metadataFilePath = `${cwd}/backups/_metadata.json`;
 
 
+/**
+ * Download all the thumbnails from hobune.stream into
+ * packages/website/public/images/thumbnails.
+ */
 async function downloadThumbnails() {
   const thumbnailsFolderPath = `${cwd}/packages/website/public/images/thumbnails`;
 
@@ -32,16 +36,14 @@ async function downloadThumbnails() {
     const extension = url.substring(url.lastIndexOf('.') + 1);
 
     execSync(`curl "${url}" --output ${thumbnailsFolderPath}/${id}.${extension}`);
-    if (extension === 'webp') {
-      execSync(`magick ${thumbnailsFolderPath}/${id}.${extension} ${thumbnailsFolderPath}/${id}.jpg`);
-    }
   }
-
-  execSync(`rm -f ${thumbnailsFolderPath}/*.webp`);
 
 }
 
-
+/**
+ * Download all the videos from hobune.stream.
+ * NOTE: This script is not meant to be run again.
+ */
 async function downloadVideos() {
   const videosFolderPath = `${cwd}/packages/website/public/videos`;
   if (!fs.existsSync(videosFolderPath)) fs.mkdirSync(videosFolderPath);
