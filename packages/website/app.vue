@@ -81,7 +81,7 @@ function toggleModal() {
             src="https://ghbtns.com/github-btn.html?user=geauser&repo=internetcheckpoint&type=star&count=true"
             frameborder="0"
             scrolling="0"
-            width="80"
+            width="120"
             height="20"
             title="GitHub"></iframe>
 
