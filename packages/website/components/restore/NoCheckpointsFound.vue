@@ -25,7 +25,7 @@ const emit = defineEmits(['tryAgain']);
         </li>
         <li>
           Your comments were added after the archive's creation on 2021/04/07.
-          Any comment after this date isn't in <a href="#" target="_blank">Rebane's archive</a> and is sadly lost.
+          Any comment after this date isn't in <a href="https://www.reddit.com/r/taia777/comments/o1rls6/taia777_videos_and_comments_archive/" target="_blank">Rebane's archive</a> and is sadly lost.
         </li>
       </ol>
 
