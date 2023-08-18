@@ -21,7 +21,7 @@ export const handler = ApiHandler(async (event) => {
 
   const res = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=id&mine=true&access_token=${accessToken}`);
   const data = await res.json() as unknown as  { items: any[] };
-  const channels = data.items;
+  const channels = data.items ?? [];
 
   await Promise.all(channels.map(async (channel) => {
 
