@@ -1,0 +1,204 @@
+{
+  "id": "00000000-0000-0000-0000-000000000000",
+  "prevId": "",
+  "version": "5",
+  "dialect": "mysql",
+  "tables": {
+    "comment": {
+      "name": "comment",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "authorUid": {
+          "autoincrement": false,
+          "name": "authorUid",
+          "type": "varchar(40)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "authorChannelId": {
+          "autoincrement": false,
+          "name": "authorChannelId",
+          "type": "varchar(150)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "text": {
+          "autoincrement": false,
+          "name": "text",
+          "type": "varchar(10000)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "importedAuthorName": {
+          "autoincrement": false,
+          "name": "importedAuthorName",
+          "type": "varchar(200)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "importedAuthorPhoto": {
+          "autoincrement": false,
+          "name": "importedAuthorPhoto",
+          "type": "varchar(300)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "votes": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "votes",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "repliesCount": {
+          "default": 0,
+          "autoincrement": false,
+          "name": "repliesCount",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "createdAt": {
+          "default": "CURRENT_TIMESTAMP",
+          "autoincrement": false,
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "score": {
+          "autoincrement": false,
+          "name": "score",
+          "type": "double",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "videoId": {
+          "autoincrement": false,
+          "name": "videoId",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "extra": {
+          "autoincrement": false,
+          "name": "extra",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "comment_id": {
+          "name": "comment_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "indexes": {
+        "comment_repliesCount_idx": {
+          "name": "comment_repliesCount_idx",
+          "columns": [
+            "repliesCount"
+          ],
+          "isUnique": false
+        },
+        "comment_score_idx": {
+          "name": "comment_score_idx",
+          "columns": [
+            "score"
+          ],
+          "isUnique": false
+        },
+        "comment_videoId_idx": {
+          "name": "comment_videoId_idx",
+          "columns": [
+            "videoId"
+          ],
+          "isUnique": false
+        },
+        "comment_votes_idx": {
+          "name": "comment_votes_idx",
+          "columns": [
+            "votes"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    },
+    "video": {
+      "name": "video",
+      "columns": {
+        "id": {
+          "autoincrement": false,
+          "name": "id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "autoincrement": false,
+          "name": "title",
+          "type": "varchar(1000)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "viewCount": {
+          "autoincrement": false,
+          "name": "viewCount",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "likeCount": {
+          "autoincrement": false,
+          "name": "likeCount",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dislikeCount": {
+          "autoincrement": false,
+          "name": "dislikeCount",
+          "type": "int",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "publishedAt": {
+          "autoincrement": false,
+          "name": "publishedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "compositePrimaryKeys": {
+        "video_id": {
+          "name": "video_id",
+          "columns": [
+            "id"
+          ]
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "schemas": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}

@@ -22,8 +22,14 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.16",
+    "@heroicons/vue": "^2.0.18",
+    "@nuxt/devtools": "^0.8.0",
+    "@pinia/nuxt": "^0.4.11",
     "@vueuse/core": "^10.1.2",
     "dayjs": "^1.11.8",
-    "media-chrome": "^1.0.0"
+    "firebase": "^10.1.0",
+    "media-chrome": "^1.0.0",
+    "pinia": "^2.1.6"
   }
 }
