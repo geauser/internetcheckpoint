@@ -85,6 +85,8 @@ const steps = [
             <img
               class="border border-gray-200 rounded-md shadow-sm max-w-[280px]"
               src="/images/oauth-example.png" />
+
+            <p class="text-xs text-gray-700 mt-2"><b class="underline">Note</b>: No personal information will be used nor stored.</p>
           </template>
 
         </div>
