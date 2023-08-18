@@ -154,6 +154,7 @@ async function submitEmail(event: Event) {
         </Transition>
 
       </header>
+      <NuxtLoadingIndicator color="#000000" />
       <NuxtPage keepalive />
     </div>
     <SideNav v-if="$route.path !== '/restore'" class="mt-6 sm:mt-14"/>
