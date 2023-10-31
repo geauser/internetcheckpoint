@@ -6,6 +6,15 @@ export default defineNuxtConfig({
       isCustomElement: tag => tag.includes('media-'),
     }
   },
+
+
+  ssr: false,
+  content: {
+    experimental: {
+      clientDB: true
+    }
+  },
+
   css: [
     '~/assets/css/transitions.css',
     '~/assets/css/animations.css',
@@ -14,6 +23,7 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
     '@nuxt/image',
+    '@nuxt/content',
     'nuxt-gtag',
     [
       '@nuxtjs/google-fonts', {

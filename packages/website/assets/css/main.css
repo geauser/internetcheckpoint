@@ -72,3 +72,12 @@ body,
 #__nuxt {
   @apply w-full h-full;
 } */
+
+
+.prose a {
+  @apply no-underline hover:underline;
+}
+
+.prose p > a {
+  @apply underline;
+}

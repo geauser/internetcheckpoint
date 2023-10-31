@@ -78,6 +78,11 @@ const steps = [
               </svg>
               {{ logingIn ? 'Logging in...' : 'Connect YouTube Account' }}
             </button>
+
+            <p class="text-xs text-gray-700 mt-1">
+              We don't use/store personal information. See <NuxtLink href="/privacy" target="_blank" class="text-xs font-normal">Privacy Policy</NuxtLink>.
+            </p>
+
           </template>
 
           <!-- Second Step -->
@@ -86,7 +91,6 @@ const steps = [
               class="border border-gray-200 rounded-md shadow-sm max-w-[280px]"
               src="/images/oauth-example.png" />
 
-            <p class="text-xs text-gray-700 mt-2"><b class="underline">Note</b>: No personal information will be used nor stored.</p>
           </template>
 
         </div>
