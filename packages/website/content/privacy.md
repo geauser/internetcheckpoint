@@ -8,7 +8,9 @@ The website [https://internetcheckpoint.page](https://internetcheckpoint.page) r
 
 ### Find Checkpoints Feature
 
-The ["Find checkpoints"](https://internetcheckpoint.page/restore) feature allows you to find your old comments by logging into your Google account. Your YouTube channel ID is used for this purpose, but is not stored or used for any other purpose.
+The ["Find checkpoints"](https://internetcheckpoint.page/restore) feature allows you to find your old comments by logging into your Google account. When you log in, and grant
+permission to this website to access your Youtube data, the website will get your Youtube Channel ID and will use it to find your old comments in the archive. Nothing
+else is collected nor stored.
 
 ### Google Analytics
 
