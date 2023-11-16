@@ -14,7 +14,7 @@ const steps = [
   {
     title: 'Grant Access',
     description: `
-      To find your checkpoints in the archive, we need to match your channel ID. Granting access lets us do this.
+      We will use your Youtube channel ID to find your checkpoints in the archive. Granting access lets us do this.
     `,
   },
   {
