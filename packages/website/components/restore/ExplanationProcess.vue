@@ -32,7 +32,7 @@ const steps = [
 
     <h1 class="text-2xl font-semibold text-center mb-4">Find previous checkpoints</h1>
     <p class="text-sm text-center text-gray-700">
-      Using the comments archives of <a href="https://www.reddit.com/r/taia777/comments/o1rls6/taia777_videos_and_comments_archive/" target="_blank">Rebane</a>, you're now
+      Using the comments archives of <a href="https://www.reddit.com/r/taia777/comments/o1rls6/taia777_videos_and_comments_archive/" target="_blank">Rebane</a> and the Youtube API, you're now
       able to find your previous checkpoints automatically.
     </p>
 
