@@ -13,7 +13,7 @@ import {
 const len = (length: number) => ({ length });
 
 
-
+export type CommentTable = typeof comment.$inferSelect;
 export const comment = mysqlTable("comment", {
 
 	id:                  varchar("id", len(100)).notNull(),
@@ -39,6 +39,7 @@ export const comment = mysqlTable("comment", {
 	}
 });
 
+export type VideoTable = typeof video.$inferSelect;
 export const video = mysqlTable("video", {
 
 	id:           varchar("id", len(255)).notNull(),
@@ -55,6 +56,7 @@ export const video = mysqlTable("video", {
 	}
 });
 
+export type OwnerTable = typeof owners.$inferSelect;
 export const owners = mysqlTable("owners", {
   uid:       varchar("uid", len(255)).primaryKey(),
   channelId: varchar("channelId", len(255)),

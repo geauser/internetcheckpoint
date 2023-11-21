@@ -22,7 +22,7 @@ export function WebStack({ stack, app }: StackContext) {
     path:         'packages/website',
     buildOutput:  '.output/public',
     buildCommand: 'yarn generate',
-    errorPage:    'redirect_to_index_page',
+    errorPage:    '404.html',
 
     ...(['prod', 'dev'].includes(app.stage) && {
       customDomain: {

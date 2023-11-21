@@ -28,7 +28,7 @@ const steps = [
 
 <template>
 
-  <div class="flex flex-col animate-fade-in">
+  <div class="flex flex-col animate-fade-in px-0 sm:px-0">
 
     <h1 class="text-2xl font-semibold text-center mb-4">Find previous checkpoints</h1>
     <p class="text-sm text-center text-gray-700">
@@ -80,7 +80,7 @@ const steps = [
             </button>
 
             <p class="text-xs text-gray-700 mt-1">
-              We don't use/store personal information. See <NuxtLink href="/privacy" target="_blank" class="text-xs font-normal">Privacy Policy</NuxtLink>.
+              We don't use/store personal information. See <NuxtLink to="privacy" target="_blank" class="text-xs font-normal">Privacy Policy</NuxtLink>.
             </p>
 
           </template>

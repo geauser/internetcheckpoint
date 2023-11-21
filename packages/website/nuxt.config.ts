@@ -1,4 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import path from "node:path";
+
+
 export default defineNuxtConfig({
 
   vue: {
@@ -7,12 +10,8 @@ export default defineNuxtConfig({
     }
   },
 
-
-  ssr: false,
-  content: {
-    experimental: {
-      clientDB: true
-    }
+  alias: {
+    '@internetcheckpoint/functions': path.resolve(__dirname, '../functions/src'),
   },
 
   css: [
@@ -23,7 +22,6 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
     '@nuxt/image',
-    '@nuxt/content',
     'nuxt-gtag',
     [
       '@nuxtjs/google-fonts', {

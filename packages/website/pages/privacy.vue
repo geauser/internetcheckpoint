@@ -1,9 +1,10 @@
 <script lang="ts" setup>
+import markdown from "~/content/privacy.md?raw";
 </script>
 
 <template>
 
-  <section class="max-w-lg mx-auto w-full py-10">
+  <section class="px-4 sm:px-0 pb-10">
 
     <div class="flex justify-center max-w-lg mx-auto mt-14 sm:mt-0 mb-8 pt-10">
       <button
@@ -27,10 +28,11 @@
     </div>
 
 
-    <ContentDoc
+    <p
       class="prose animate-fade-in opacity-0 prose-sm dark:prose-invert mt-6"
       style="animation-delay: 200ms;"
-      path="/privacy" />
+      v-html="$mdRenderer.render(markdown)"
+      />
 
   </section>
 

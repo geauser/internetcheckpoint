@@ -94,80 +94,83 @@ watch(() => store.currentUser, () => {
 
 <template>
 
+  <section class="px-4 sm:px-0">
 
-  <div class="flex justify-center max-w-lg mx-auto mt-14 sm:mt-0 mb-8 pt-10">
-    <RestoreGoBackToComments class="" />
-  </div>
-
-  <Transition name="fade" mode="out-in">
-
-    <div
-      v-if="store.waitingForFirebase || firstTimeLoading"
-      class="flex justify-center items-center h-full">
-      <CircleLoading class="h-5 w-5 border-gray-500" />
+    <div class="flex justify-center max-w-lg mx-auto mt-14 sm:mt-0 mb-8 pt-10">
+      <RestoreGoBackToComments class="" />
     </div>
-
-    <div
-      v-else
-      class="
-        flex flex-col items-center
-        max-w-lg mx-auto w-full px-6">
-
-      <Transition name="fade" mode="out-in">
-
-        <RestoreCheckpointsList
-          v-if="hasLoadedCheckpoints && checkpoints.length"
-          :checkpoints="checkpoints" />
-        <RestoreNoCheckpointsFound
-          v-else-if="hasLoadedCheckpoints && checkpoints.length === 0"
-          @tryAgain="tryAgain" />
-        <RestoreGatheringCheckpointsLoading v-else-if="loadingCheckpoints" />
-        <RestoreExplanationProcess
-          v-else
-          :loging-in="loggingIn"
-          @login="loginWithGoogle" />
-
-      </Transition>
-
-    </div>
-
-  </Transition>
-
-
-  <div
-    v-if="false"
-    class="flex flex-col items-center mt-14 sm:mt-0 pt-10 max-w-lg mx-auto w-full h-full px-6">
 
     <Transition name="fade" mode="out-in">
 
       <div
-        v-if="!hasLoadedCheckpoints"
-        class="flex flex-col items-center">
+        v-if="store.waitingForFirebase || firstTimeLoading"
+        class="flex justify-center items-center h-full">
+        <CircleLoading class="h-5 w-5 border-gray-500" />
+      </div>
 
+      <div
+        v-else
+        class="
+          flex flex-col items-center
+          max-w-lg mx-auto w-full">
 
-        <Transition name="fade">
+        <Transition name="fade" mode="out-in">
 
-          <div
-            v-if="!loadingCheckpoints"
-            class="mt-10">
-
-
-          </div>
+          <RestoreCheckpointsList
+            v-if="hasLoadedCheckpoints && checkpoints.length"
+            :checkpoints="checkpoints" />
+          <RestoreNoCheckpointsFound
+            v-else-if="hasLoadedCheckpoints && checkpoints.length === 0"
+            @tryAgain="tryAgain" />
+          <RestoreGatheringCheckpointsLoading v-else-if="loadingCheckpoints" />
+          <RestoreExplanationProcess
+            v-else
+            :loging-in="loggingIn"
+            @login="loginWithGoogle" />
 
         </Transition>
-
-        <div
-          v-if="loadingCheckpoints"
-          class="inline-flex justify-center items-center animate-fade-in-up mt-10 space-x-2 border border-gray-200 bg-white px-4 py-2 rounded-md shadow-sm">
-          <p class="text-sm text-gray-500">Gathering checkpoints...</p>
-          <CircleLoading class="h-3 w-3 border-gray-300" />
-        </div>
 
       </div>
 
     </Transition>
 
-  </div>
+
+    <div
+      v-if="false"
+      class="flex flex-col items-center mt-14 sm:mt-0 pt-10 max-w-lg mx-auto w-full h-full px-6">
+
+      <Transition name="fade" mode="out-in">
+
+        <div
+          v-if="!hasLoadedCheckpoints"
+          class="flex flex-col items-center">
+
+
+          <Transition name="fade">
+
+            <div
+              v-if="!loadingCheckpoints"
+              class="mt-10">
+
+
+            </div>
+
+          </Transition>
+
+          <div
+            v-if="loadingCheckpoints"
+            class="inline-flex justify-center items-center animate-fade-in-up mt-10 space-x-2 border border-gray-200 bg-white px-4 py-2 rounded-md shadow-sm">
+            <p class="text-sm text-gray-500">Gathering checkpoints...</p>
+            <CircleLoading class="h-3 w-3 border-gray-300" />
+          </div>
+
+        </div>
+
+      </Transition>
+
+    </div>
+
+  </section>
 
 </template>
 
