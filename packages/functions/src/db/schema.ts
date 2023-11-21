@@ -26,7 +26,6 @@ export const comment = mysqlTable("comment", {
 	createdAt:           timestamp("createdAt", { mode: 'string' }).defaultNow(),
 	score:               double("score"),
 	videoId:             varchar("videoId", len(255)),
-	extra:               json("extra"),
 
 },
 (table) => {
