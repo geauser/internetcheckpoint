@@ -1,15 +1,26 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import path from "node:path";
 
-const { NUXT_GA_ID, NUXT_API_URL, NUXT_APP_DOMAIN } = process.env;
 
 export default defineNuxtConfig({
+
   vue: {
     compilerOptions: {
       isCustomElement: tag => tag.includes('media-'),
     }
   },
-  css: ['~/assets/css/main.css'],
+
+  alias: {
+    '@internetcheckpoint/functions': path.resolve(__dirname, '../functions/src'),
+  },
+
+  css: [
+    '~/assets/css/transitions.css',
+    '~/assets/css/animations.css',
+    '~/assets/css/main.css'
+  ],
   modules: [
+    '@pinia/nuxt',
     '@nuxt/image',
     'nuxt-gtag',
     [
@@ -29,12 +40,14 @@ export default defineNuxtConfig({
     },
   },
   gtag: {
-    id: NUXT_GA_ID,
+    id: process.env.NUXT_GA_ID,
   },
   runtimeConfig: {
     public: {
-      appDomain: NUXT_APP_DOMAIN ?? 'internetcheckpoint.page',
-      apiUrl: NUXT_API_URL ?? 'https://odiw5mq8be.execute-api.us-east-1.amazonaws.com',
+      stage:          process.env.NUXT_STAGE,
+      appDomain:      process.env.NUXT_APP_DOMAIN ?? 'internetcheckpoint.page',
+      apiUrl:         process.env.NUXT_API_URL ?? 'https://odiw5mq8be.execute-api.us-east-1.amazonaws.com',
+      firebaseConfig: process.env.NUXT_FIREBASE_CONFIG,
     }
   }
 });

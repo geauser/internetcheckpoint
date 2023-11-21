@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type CommentTable }  from '@internetcheckpoint/functions/planetscale/db';
+import { type CommentTable } from '@internetcheckpoint/functions/db/schema';
 
 defineProps<{
   loading?: boolean,

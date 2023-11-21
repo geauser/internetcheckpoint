@@ -5,8 +5,9 @@
     "module": "esnext",
     "baseUrl": ".",
     "paths": {
-      "database": ["./planetscale/db.ts"],
-      "backups/*": ["../../backups/*"],
+      "@db": ["./src/db/index.ts"],
+      "@db/*": ["./src/db/*"],
+      "backups/*": ["../../backups/*"]
     }
   }
 }

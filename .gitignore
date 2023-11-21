@@ -14,3 +14,9 @@ node_modules
 *.env
 
 videos
+
+# Infrastructure
+guiderail-service-account.json
+firebase/persistent-export
+
+*.log

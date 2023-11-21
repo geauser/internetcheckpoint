@@ -7,20 +7,23 @@
     "typecheck": "tsc -noEmit",
     "create-migration": "tsx ./scripts/createMigration.ts",
     "seed": "sst bind tsx ./scripts/seed.ts",
-    "migrate": "sst bind tsx ./scripts/migrate.ts"
+    "generate": "drizzle-kit generate:mysql",
+    "migrate": "sst bind tsx ./src/db/migrate.ts"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.115",
     "@types/node": "^20.2.5",
-    "kysely-migration-cli": "^0.2.1",
+    "drizzle-kit": "^0.19.12",
     "mysql2": "^3.3.3",
-    "sst": "^2.11.6",
+    "sst": "2.24.7",
     "vitest": "^0.31.4"
   },
   "dependencies": {
-    "@planetscale/database": "^1.7.0",
+    "@planetscale/database": "^1.10.0",
     "dayjs": "^1.11.8",
-    "kysely": "^0.25.0",
-    "kysely-planetscale": "^1.3.0"
+    "drizzle-orm": "^0.28.2",
+    "firebase-admin": "^11.10.1",
+    "mysql2": "^3.6.0",
+    "node-fetch": "^3.3.2"
   }
 }

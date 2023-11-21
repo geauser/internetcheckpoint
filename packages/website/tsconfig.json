@@ -3,8 +3,9 @@
   "extends": "./.nuxt/tsconfig.json",
   "resolveJsonModule": true,
   "compilerOptions": {
+    "resolveJsonModule": true,
     "paths": {
-      "@internetcheckpoint/functions": ["../functions/*"]
+      "@internetcheckpoint/functions/*": ["../functions/src/*"]
     }
   }
 }

@@ -1,0 +1,28 @@
+<script lang="ts" setup>
+</script>
+
+<template>
+
+  <button
+    class="
+      inline-flex items-center justify-center
+      hover:bg-gray-300
+      transition-colors
+      rounded-full
+      bg-gray-200
+      font-medium
+      !text-gray-700 text-xs
+      py-1 pr-3 pl-2 gap-1.5"
+    @click="navigateTo('/')">
+
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+    </svg>
+
+    Go back to comments
+  </button>
+
+</template>
+
+<style>
+</style>

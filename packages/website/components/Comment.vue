@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { type CommentTable } from '@internetcheckpoint/functions/planetscale/db';
+import { type CommentTable } from '@internetcheckpoint/functions/db/schema';
 dayjs.extend(relativeTime)
 
 const props = defineProps<{
