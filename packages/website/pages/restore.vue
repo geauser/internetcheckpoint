@@ -7,12 +7,15 @@ const store = useStore();
 const firstTimeLoading     = ref(true);
 const hasLoadedCheckpoints = ref(false);
 const loadingCheckpoints   = ref(false);
+const notGranted           = ref(false);
 const loggingIn            = ref(false);
 
 
 const checkpoints = ref<any[]>([]);
 
 async function getCheckpoints() {
+
+  if (!store.idToken) return [];
 
   const res = await fetch(`${config.public.apiUrl}/checkpoints`, {
     headers: {
@@ -28,6 +31,10 @@ async function loginWithGoogle() {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
   provider.addScope('https://www.googleapis.com/auth/youtube.readonly');
+  provider.setCustomParameters({
+    prompt: 'consent', // Force consent everytime
+  });
+
 
   try {
 
@@ -37,17 +44,29 @@ async function loginWithGoogle() {
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const { user } = result;
 
+    if (!credential?.accessToken) {
+      notGranted.value = true;
+      return;
+    }
 
     store.idToken = await user.getIdToken(true);
     store.currentUser = user;
 
     loadingCheckpoints.value = true;
-    await fetch(`${config.public.apiUrl}/restore?token=${credential?.accessToken}`, {
+
+    const res = await fetch(`${config.public.apiUrl}/restore?token=${credential?.accessToken}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${store.idToken}`
       }
     });
+    const data = await res.json();
+
+    if (data.error === 'PERMISSION_DENIED') {
+      notGranted.value = true;
+      await store.logout();
+      return;
+    }
 
     checkpoints.value =  await getCheckpoints();
     hasLoadedCheckpoints.value = true;
@@ -65,6 +84,7 @@ async function loginWithGoogle() {
 }
 
 function tryAgain() {
+  notGranted.value = false;
   hasLoadedCheckpoints.value = false;
   store.logout();
 }
@@ -73,8 +93,10 @@ watch(() => store.waitingForFirebase, async () => {
 
   if (store.waitingForFirebase && !hasLoadedCheckpoints.value) return;
 
-  checkpoints.value = await getCheckpoints();
-  hasLoadedCheckpoints.value = true;
+  if (store.idToken) {
+    checkpoints.value = await getCheckpoints();
+    hasLoadedCheckpoints.value = true;
+  }
 
   firstTimeLoading.value = false;
 
@@ -122,6 +144,9 @@ watch(() => store.currentUser, () => {
           <RestoreNoCheckpointsFound
             v-else-if="hasLoadedCheckpoints && checkpoints.length === 0"
             @tryAgain="tryAgain" />
+          <RestoreNotGranted
+            v-else-if="notGranted"
+            @tryAgain="loginWithGoogle" />
           <RestoreGatheringCheckpointsLoading v-else-if="loadingCheckpoints" />
           <RestoreExplanationProcess
             v-else
