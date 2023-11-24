@@ -15,6 +15,13 @@
       "when": 1692284844823,
       "tag": "0001_romantic_puppet_master",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1700817222857,
+      "tag": "0002_blushing_wallow",
+      "breakpoints": true
     }
   ]
 }
