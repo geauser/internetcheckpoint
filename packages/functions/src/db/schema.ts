@@ -30,11 +30,12 @@ export const comment = mysqlTable("comment", {
 },
 (table) => {
 	return {
-		repliesCountIdx: index("comment_repliesCount_idx").on(table.repliesCount),
-		scoreIdx:        index("comment_score_idx").on(table.score),
-		videoIdIdx:      index("comment_videoId_idx").on(table.videoId),
-		votesIdx:        index("comment_votes_idx").on(table.votes),
-		commentId:       primaryKey(table.id)
+		repliesCountIdx:    index("comment_repliesCount_idx").on(table.repliesCount),
+		scoreIdx:           index("comment_score_idx").on(table.score),
+		videoIdIdx:         index("comment_videoId_idx").on(table.videoId),
+		votesIdx:           index("comment_votes_idx").on(table.votes),
+    authorChannelIdIdx: index("comment_authorChannelId_idx").on(table.authorChannelId),
+		commentId:          primaryKey(table.id)
 	}
 });
 
