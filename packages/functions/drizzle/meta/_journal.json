@@ -1,26 +1,12 @@
 {
-  "version": "5",
-  "dialect": "mysql",
+  "version": "7",
+  "dialect": "postgresql",
   "entries": [
     {
       "idx": 0,
-      "version": "5",
-      "when": 1692275486243,
-      "tag": "0000_regular_vanisher",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1692284844823,
-      "tag": "0001_romantic_puppet_master",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1700817222857,
-      "tag": "0002_blushing_wallow",
+      "version": "7",
+      "when": 1730969830709,
+      "tag": "0000_romantic_strong_guy",
       "breakpoints": true
     }
   ]

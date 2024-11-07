@@ -1,8 +1,6 @@
 import { SSTConfig } from "sst";
 import { ApiStack } from "./stacks/ApiStack";
 import { WebStack } from "./stacks/WebStack";
-import { CronStack } from "./stacks/CronStack";
-import { EventStack } from "./stacks/EventStack";
 import { ConfigStack } from "./stacks/ConfigStack";
 
 export default {
@@ -26,7 +24,5 @@ export default {
       .stack(ConfigStack)
       .stack(ApiStack)
       .stack(WebStack);
-      // .stack(EventStack)
-      // .stack(CronStack);
   }
 } satisfies SSTConfig;

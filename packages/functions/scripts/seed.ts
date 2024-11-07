@@ -1,8 +1,18 @@
+import iconv from "iconv-lite";
 import fs from 'node:fs';
 import path from 'node:path';
-import { CommentTable, db } from 'database';
+import { db } from '@db';
+import { Comments, Videos, type Comment } from '@db/schema';
 import dayjs from 'dayjs';
+import { eq } from "drizzle-orm";
 
+
+function sanitizeAndEncodeString(str: string): string {
+  // First, remove null bytes
+  const sanitized = str.replace(/\0/g, '');
+  // Then, ensure it's properly encoded as UTF-8
+  return iconv.decode(iconv.encode(sanitized, 'utf8'), 'utf8');
+}
 
 function estimateCommentCreationDate(time: string) {
 
@@ -52,7 +62,7 @@ if (cwd.split('/').pop() !== 'functions') {
 }
 
 const replies = new Map<string, number>();
-const comments: CommentTable[] = [];
+const comments: Comment[] = [];
 const backupFolderPath = path.join(path.join(cwd, '../../backups'));
 const metadata = await import(path.join(backupFolderPath, '_metadata.json')).catch(err => {}) ?? {};
 const files = fs.readdirSync(backupFolderPath).filter(f => f !== '_metadata.json');
@@ -106,15 +116,14 @@ for (const file of files) {
       // The filename in Rebane's backup are the videoId where the
       // comment was posted, so we use them here.
       videoId: file.replace('.json', ''),
-      authorUid: null,
       authorChannelId: comment.channel,
-      text: comment.text,
-      importedAuthorName: comment.author,
+      text: sanitizeAndEncodeString(comment.text),
+      importedAuthorName: sanitizeAndEncodeString(comment.author),
       importedAuthorPhoto: comment.photo,
       votes,
       repliesCount,
       score: isReply ? null : computeCommentScore(repliesCount, votes, comment.text.length),
-      createdAt: estimateCommentCreationDate(comment.time),
+      createdAt: estimateCommentCreationDate(comment.time).toISOString(),
     });
 
   }
@@ -124,16 +133,16 @@ console.log('\nInserting videos ...\n');
 
 // Insert the videos into the database
 for (const videoId in metadata.default) {
-
-  const video = metadata[videoId];
+  const videoData = metadata[videoId];
 
   const videoAlreadyExists = await db
-    .selectFrom('video')
-    .where('id', '=', videoId)
-    .selectAll()
-    .executeTakeFirst();
+    .select()
+    .from(Videos)
+    .where(eq(Videos.id, videoId))
+    .limit(1)
+    .execute();
 
-  if (videoAlreadyExists) continue;
+  if (videoAlreadyExists.length > 0) continue;
 
   const {
     title,
@@ -141,46 +150,47 @@ for (const videoId in metadata.default) {
     likeCount,
     dislikeCount,
     publishedAt,
-  } = video;
+  } = videoData;
 
   console.log('Inserting video', videoId, '...');
 
   await db
-    .insertInto('video')
+    .insert(Videos)
     .values({
       id: videoId,
       title,
       viewCount,
       likeCount,
       dislikeCount,
-      publishedAt: dayjs(publishedAt).toDate(),
+      publishedAt: dayjs(publishedAt).toISOString(),
     })
     .execute();
-
 }
 
 console.log('\nInserting comments ...\n');
 
 // Insert the comments into the database
 let inserted = 0;
-const CHUNK_SIZE = 1000; // Use chunk to avoid issues with planetscale
+const CHUNK_SIZE = 1000;
 
 for (let i = 0; i < comments.length; i += CHUNK_SIZE) {
   const chunk = comments.slice(i, i + CHUNK_SIZE);
 
+
   await db
-    .insertInto('comment')
-    .values(chunk)
-    .execute()
-    .catch(err => {
-      console.log(err);
-      process.exit(1);
-    });
+  .insert(Comments)
+  .values(chunk)
+  .execute()
+  .catch(err => {
+    console.log(chunk);
+    console.log(err);
+    process.exit(1);
+  });
+
 
   inserted += chunk.length;
 
   console.log(`Inserted ${inserted}/${comments.length} comments ...`);
 }
-
 
 process.exit(0);

@@ -1,4 +1,14 @@
 {
-  "extends": "@tsconfig/node16/tsconfig.json",
-  "exclude": ["packages"]
+  "extends": "@tsconfig/node20/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@db": ["./packages/functions/src/db/index.ts"],
+      "@db/*": ["./packages/functions/src/db/*"],
+      "backups/*": ["./backups/*"]
+    }
+  },
 }

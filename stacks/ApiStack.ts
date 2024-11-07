@@ -1,4 +1,4 @@
-import { StackContext, Api, Config, use, Function } from "sst/constructs";
+import { Api, Function, StackContext, use } from "sst/constructs";
 import { ConfigStack } from "./ConfigStack";
 
 

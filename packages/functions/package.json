@@ -5,25 +5,23 @@
   "scripts": {
     "test": "sst bind vitest",
     "typecheck": "tsc -noEmit",
-    "create-migration": "tsx ./scripts/createMigration.ts",
-    "seed": "sst bind tsx ./scripts/seed.ts",
-    "generate": "drizzle-kit generate:mysql",
-    "migrate": "sst bind tsx ./src/db/migrate.ts"
+    "seed": "sst bind bun ./scripts/seed.ts",
+    "generate": "drizzle-kit generate",
+    "migrate": "sst bind bun ./src/db/migrate.ts"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.115",
     "@types/node": "^20.2.5",
-    "drizzle-kit": "^0.19.12",
-    "mysql2": "^3.3.3",
     "sst": "2.24.7",
     "vitest": "^0.31.4"
   },
   "dependencies": {
     "@planetscale/database": "^1.10.0",
     "dayjs": "^1.11.8",
-    "drizzle-orm": "^0.28.2",
+    "drizzle-kit": "^0.28.0",
+    "drizzle-orm": "^0.36.1",
     "firebase-admin": "^11.10.1",
-    "mysql2": "^3.6.0",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "postgres": "^3.4.5"
   }
 }

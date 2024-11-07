@@ -1,7 +1,7 @@
 import { db } from "@db";
-import { owners } from "@db/schema";
+import { Owners } from "@db/schema";
 import fetch from 'node-fetch';
-import { getUser } from "src/utils/firebase";
+import { getUser } from "./utils/firebase";
 import { ApiHandler } from "sst/node/api";
 
 
@@ -34,7 +34,7 @@ export const handler = ApiHandler(async (event) => {
 
     try {
 
-      await db.insert(owners).values({
+      await db.insert(Owners).values({
         uid: user.uid,
         channelId: channel.id,
       });

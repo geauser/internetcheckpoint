@@ -1,5 +1,5 @@
 import { APIGatewayEvent } from "aws-lambda";
-import { getAuth } from "src/utils/firebase";
+import { getAuth } from "./utils/firebase";
 
 
 export const handler = async (event: APIGatewayEvent) => {

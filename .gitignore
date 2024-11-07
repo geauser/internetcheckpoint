@@ -20,3 +20,5 @@ guiderail-service-account.json
 firebase/persistent-export
 
 *.log
+
+*.secrets

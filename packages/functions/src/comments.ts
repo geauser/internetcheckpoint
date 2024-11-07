@@ -1,5 +1,5 @@
 import { db } from "@db";
-import { comment } from "@db/schema";
+import { Comments } from "@db/schema";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import { and, eq, like, notLike, sql } from "drizzle-orm";
 
@@ -14,23 +14,23 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const batchSize           = isLoadingReplies ? 10 : 100;
 
 
-  let query = db.select().from(comment);
+  let query = db.select().from(Comments);
 
   if (isLoadingReplies) {
     query
-      .where(like(comment.id, `${repliesOf}.%`))
-      .orderBy(sql`${comment.id} ASC`);
+      .where(like(Comments.id, `${repliesOf}.%`))
+      .orderBy(sql`${Comments.id} ASC`);
   }
 
   if (isNotLoadingReplies) {
     query
       .where(
         and(
-          eq(comment.videoId, videoId ?? ''),
-          notLike(comment.id, '%.%'),
+          eq(Comments.videoId, videoId ?? ''),
+          notLike(Comments.id, '%.%'),
         )
       )
-      .orderBy(sql`${comment.score} DESC`);
+      .orderBy(sql`${Comments.score} DESC`);
   }
 
 

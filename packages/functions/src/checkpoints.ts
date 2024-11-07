@@ -1,8 +1,8 @@
 import { ApiHandler } from "sst/node/api";
-import { comment, owners } from "@db/schema";
+import { Comments, Owners } from "@db/schema";
 import { db } from "@db";
 import { and, eq, inArray, notLike, sql } from "drizzle-orm";
-import { getUser } from "src/utils/firebase";
+import { getUser } from "./utils/firebase";
 
 
 export const handler = ApiHandler(async (event) => {
@@ -14,10 +14,10 @@ export const handler = ApiHandler(async (event) => {
 
   const channelIds = await db
     .select({
-      channelId: owners.channelId,
+      channelId: Owners.channelId,
     })
-    .from(owners)
-    .where(eq(owners.uid, user.uid))
+    .from(Owners)
+    .where(eq(Owners.uid, user.uid))
     .execute()
     .then((rows) => rows.map((row) => row.channelId).filter((id) => !!id)) as string[];
 
@@ -26,14 +26,14 @@ export const handler = ApiHandler(async (event) => {
 
     checkpoints = await db
       .select()
-      .from(comment)
+      .from(Comments)
       .where(
         and(
-          inArray(comment.authorChannelId, channelIds),
-          notLike(comment.id, '%.%'),
+          inArray(Comments.authorChannelId, channelIds),
+          notLike(Comments.id, '%.%'),
         )
       )
-      .orderBy(sql`${comment.id} DESC`)
+      .orderBy(sql`${Comments.id} DESC`)
       .execute();
 
   }

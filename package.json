@@ -1,20 +1,8 @@
 {
   "name": "internetcheckpoint",
   "version": "0.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "firebase": "cd firebase && mkdir -p persistent-export && firebase emulators:start --import ./persistent-export --export-on-exit ./persistent-export",
-    "loadSecrets": "sh -c 'sst secrets load ${0}.env --stage ${0}'",
-    "dev": "sst dev",
-    "build": "sst build",
-    "deploy": "sst deploy",
-    "remove": "sst remove",
-    "console": "sst console",
-    "typecheck": "tsc --noEmit"
-  },
   "devDependencies": {
-    "@tsconfig/node16": "^1.0.4",
+    "@tsconfig/node20": "^20.1.4",
     "@types/download": "^8.0.2",
     "@types/jsdom": "^21.1.1",
     "aws-cdk-lib": "2.91.0",
@@ -26,6 +14,21 @@
     "ttab": "^0.8.0",
     "typescript": "^5.0.4"
   },
+  "private": true,
+  "scripts": {
+    "firebase": "cd firebase && mkdir -p persistent-export && firebase emulators:start --import ./persistent-export --export-on-exit ./persistent-export",
+    "loadSecrets": "sh -c 'sst secrets load ${0}.env --stage ${0}'",
+    "dev": "sst dev",
+    "build": "sst build",
+    "deploy": "sst deploy",
+    "remove": "sst remove",
+    "console": "sst console",
+    "typecheck": "tsc --noEmit",
+    "secrets:load": "sst secrets load ./local.secrets --stage local",
+    "secrets:load:dev": "sst secrets load ./dev.secrets --stage dev",
+    "secrets:load:prod": "sst secrets load ./prod.secrets --stage prod"
+  },
+  "type": "module",
   "workspaces": [
     "packages/*"
   ]

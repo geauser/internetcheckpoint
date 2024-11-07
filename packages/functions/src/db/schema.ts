@@ -1,68 +1,62 @@
 import {
-  double,
+  doublePrecision,
   index,
-  int,
-  json,
-  mysqlTable,
+  integer,
+  pgTable,
   primaryKey,
   timestamp,
   uniqueIndex,
   varchar
-} from "drizzle-orm/mysql-core";
+} from "drizzle-orm/pg-core";
 
 const len = (length: number) => ({ length });
 
 
-export type CommentTable = typeof comment.$inferSelect;
-export const comment = mysqlTable("comment", {
+export type Comment = typeof Comments.$inferSelect;
+export const Comments = pgTable("comments", {
 
 	id:                  varchar("id", len(100)).notNull(),
 	authorChannelId:     varchar("authorChannelId", len(150)),
 	text:                varchar("text", len(10000)),
 	importedAuthorName:  varchar("importedAuthorName", len(200)),
 	importedAuthorPhoto: varchar("importedAuthorPhoto", len(300)),
-	votes:               int("votes").default(0),
-	repliesCount:        int("repliesCount").default(0),
+	votes:               integer("votes").default(0),
+	repliesCount:        integer("repliesCount").default(0),
 	createdAt:           timestamp("createdAt", { mode: 'string' }).defaultNow(),
-	score:               double("score"),
+	score:               doublePrecision("score"),
 	videoId:             varchar("videoId", len(255)),
 
 },
-(table) => {
-	return {
-		repliesCountIdx:    index("comment_repliesCount_idx").on(table.repliesCount),
-		scoreIdx:           index("comment_score_idx").on(table.score),
-		videoIdIdx:         index("comment_videoId_idx").on(table.videoId),
-		votesIdx:           index("comment_votes_idx").on(table.votes),
-    authorChannelIdIdx: index("comment_authorChannelId_idx").on(table.authorChannelId),
-		commentId:          primaryKey(table.id)
-	}
-});
+(table) => [
+  index("comment_repliesCount_idx").on(table.repliesCount),
+  index("comment_score_idx").on(table.score),
+  index("comment_videoId_idx").on(table.videoId),
+  index("comment_votes_idx").on(table.votes),
+  index("comment_authorChannelId_idx").on(table.authorChannelId),
+  primaryKey({ columns: [table.id] })
+]);
 
-export type VideoTable = typeof video.$inferSelect;
-export const video = mysqlTable("video", {
+export type Video = typeof Videos.$inferSelect;
+export const Videos = pgTable("videos", {
 
 	id:           varchar("id", len(255)).notNull(),
 	title:        varchar("title", len(1000)),
-	viewCount:    int("viewCount"),
-	likeCount:    int("likeCount"),
-	dislikeCount: int("dislikeCount"),
+	viewCount:    integer("viewCount"),
+	likeCount:    integer("likeCount"),
+	dislikeCount: integer("dislikeCount"),
 	publishedAt:  timestamp("publishedAt", { mode: 'string' }),
 
 },
-(table) => {
-	return {
-		videoId: primaryKey(table.id)
-	}
-});
+(table) => [primaryKey({ columns: [table.id] })]
+);
 
-export type OwnerTable = typeof owners.$inferSelect;
-export const owners = mysqlTable("owners", {
+export type Owner = typeof Owners.$inferSelect;
+export const Owners = pgTable("owners", {
   uid:       varchar("uid", len(255)).primaryKey(),
   channelId: varchar("channelId", len(255)),
-}, (table) => ({
-  uniqueIdx: uniqueIndex("uid_channelId_unique_idx").on(table.uid, table.channelId),
-}));
+}, (table) => ([
+  uniqueIndex("uid_channelId_unique_idx").on(table.uid, table.channelId),
+]));
 
 
 // export const comment = mysqlTable("comment", {
