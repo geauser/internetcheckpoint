@@ -38,7 +38,10 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
   return {
     statusCode: 200,
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'public, max-age=2592000' // 30 days
+    },
     body: JSON.stringify({ comments }),
   };
 };
