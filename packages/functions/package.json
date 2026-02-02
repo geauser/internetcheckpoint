@@ -16,7 +16,6 @@
     "vitest": "^0.31.4"
   },
   "dependencies": {
-    "@planetscale/database": "^1.10.0",
     "dayjs": "^1.11.8",
     "drizzle-kit": "^0.28.0",
     "drizzle-orm": "^0.36.1",
