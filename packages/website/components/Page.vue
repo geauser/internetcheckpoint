@@ -167,7 +167,7 @@ function toggleResponsiveComments() {
             class="w-10 h-10 rounded-full bg-center bg-contain"
             height="40"
             width="40"
-            src="https://yt3.ggpht.com/CBRr0hQOzp1NC5OSbYD_noMkx8sFIht0TqpOjjguy8DDPN0ux0vgVu1PygQXNJvDJqi8GD77=s176-c-k-c0x00ffffff-no-rj-mo"
+            src="https://yt3.ggpht.com/GY-LQJaaK4owuD-OGNHgCvDFbltgujBxxBchCBhS5qWODOSMWNn5QnL0exVb0NKAaR1GySuu=s176-c-k-c0x00ffffff-no-rj-mo"
           />
           <div class="flex flex-col justify-center">
             <p class="font-semibold text-base/6 text-stone-900 mt-0.5">taia777</p>
