@@ -2,12 +2,12 @@ import { APIGatewayProxyEvent, APIGatewayProxyEventV2, APIGatewayProxyWebsocketE
 import { apps } from "firebase-admin";
 import { cert, initializeApp } from "firebase-admin/app";
 import { DecodedIdToken } from "firebase-admin/auth";
-import { Config } from "sst/node/config";
+import { Resource } from "sst";
 export { getAuth } from "firebase-admin/auth";
 
 if (!apps.length) {
   initializeApp({
-    credential: cert(JSON.parse(Buffer.from(Config.GOOGLE_APPLICATION_CREDENTIALS, 'base64').toString('utf-8'))),
+    credential: cert(JSON.parse(Buffer.from(Resource.GOOGLE_APPLICATION_CREDENTIALS.value, 'base64').toString('utf-8'))),
   });
 }
 

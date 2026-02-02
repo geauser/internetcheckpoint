@@ -1,16 +1,16 @@
 import { migrate } from "drizzle-orm/postgres-js/migrator";
-import { Config } from "sst/node/config";
+import { Resource } from "sst";
 import chalk from "chalk";
 import { db } from "@db";
 
 try {
   console.log(
     chalk.gray('Connecting to'),
-    `${chalk.white(Config.DATABASE_URL)}`,
+    `${chalk.white(Resource.DATABASE_URL.value)}`,
     chalk.gray('...'),
   );
 
-  console.log(chalk.gray('Migrating on stage'), chalk.bold.yellow(Config.STAGE), chalk.gray('...'));
+  console.log(chalk.gray('Migrating on stage'), chalk.bold.yellow(process.env.SST_STAGE ?? 'unknown'), chalk.gray('...'));
 
   const options = { migrationsFolder: "./drizzle" };
 

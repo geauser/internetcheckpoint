@@ -22,3 +22,5 @@ firebase/persistent-export
 *.log
 
 *.secrets
+
+sst-env.d.ts

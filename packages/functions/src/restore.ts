@@ -2,10 +2,10 @@ import { db } from "@db";
 import { Owners } from "@db/schema";
 import fetch from 'node-fetch';
 import { getUser } from "./utils/firebase";
-import { ApiHandler } from "sst/node/api";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
 
-export const handler = ApiHandler(async (event) => {
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
   const user = getUser(event);
   const accessToken = event.queryStringParameters?.token ?? null;
@@ -51,4 +51,4 @@ export const handler = ApiHandler(async (event) => {
     body: JSON.stringify({}),
   };
 
-});
+};

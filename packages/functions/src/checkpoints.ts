@@ -1,11 +1,11 @@
-import { ApiHandler } from "sst/node/api";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import { Comments, Owners } from "@db/schema";
 import { db } from "@db";
 import { and, eq, inArray, notLike, sql } from "drizzle-orm";
 import { getUser } from "./utils/firebase";
 
 
-export const handler = ApiHandler(async (event) => {
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 
   const user = getUser(event);
   let checkpoints: unknown[] = [];
@@ -44,4 +44,4 @@ export const handler = ApiHandler(async (event) => {
     body: JSON.stringify(checkpoints),
   };
 
-});
+};
