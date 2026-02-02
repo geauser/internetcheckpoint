@@ -21,7 +21,7 @@ export function WebStack({ stack, app }: StackContext) {
   const landing = new StaticSite(stack, 'landing', {
     path:         'packages/website',
     buildOutput:  '.output/public',
-    buildCommand: 'yarn generate',
+    buildCommand: 'bun generate',
     errorPage:    '404.html',
 
     ...(['prod', 'dev'].includes(app.stage) && {
